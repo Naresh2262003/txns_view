@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import BlockDetailsPage from './components/BlockDetailsPage.jsx'
 import TransactionTable from './components/TransactionTable.jsx'
 import HeaderComponent from './components/Header.jsx'
+import NewPage from './components/NewView.jsx'
 import { Layout } from "antd";
 import './App.css'
 
