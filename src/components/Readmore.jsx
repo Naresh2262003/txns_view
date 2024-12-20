@@ -33,7 +33,7 @@ const ReadMore = ({ text, maxLines = 3 }) => {
           onClick={toggleExpanded}
           style={{ color: "blue", cursor: "pointer", marginTop: "4px", display: "block" }}
         >
-          {expanded ? "Show less" : "Read more"}
+          {expanded ? "Show less" : "Show more"}
         </span>
       )}
     </div>

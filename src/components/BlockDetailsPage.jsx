@@ -120,7 +120,9 @@ const DetailPage = ({ txId }) => {
                 </span>
                 </Descriptions.Item>
                   <Descriptions.Item label="Transaction Type">
-                    {blockData?.tx_type}
+                    {/* {blockData?.tx_type} */}
+
+  {blockData?.tx_type ? blockData.tx_type.toUpperCase() : "N/A"}
                   </Descriptions.Item>
                   {blockData?.tx?.tx?.amount && (
                     <Descriptions.Item label="Amount">
@@ -131,11 +133,19 @@ const DetailPage = ({ txId }) => {
                     <Descriptions.Item label="CBDC Address">
                       <span
                     style={{
+                      // fontFamily: "monospace",
+                      // color:"white",
+                      // backgroundColor: "grey",
+                      // padding: "2px 4px",
+                      // borderRadius: "4px",
                       fontFamily: "monospace",
-                      color:"white",
-                      backgroundColor: "grey",
-                      padding: "2px 4px",
-                      borderRadius: "4px",
+    color: "#000",
+    backgroundColor: "#eae5e5",
+    borderRadius: "4px",
+    display: "inline-block",
+    padding: "10px",
+    fontSize: "12px",
+                      
                     }}
                     >
                       {blockData?.tx?.tx?.cbdc_address}
@@ -145,12 +155,13 @@ const DetailPage = ({ txId }) => {
                   {blockData?.tx?.tx?.key && (
                     <Descriptions.Item label="Key">
                     <span
-                      style={{
-                        fontFamily: "monospace",
-                        color:"white",
-                        backgroundColor: "grey",
-                        padding: "2px 4px",
+                      style={{fontFamily: "monospace",
+                        color: "#000",
+                        backgroundColor: "#eae5e5",
                         borderRadius: "4px",
+                        display: "inline-block",
+                        padding: "10px",
+                        fontSize: "12px",
                       }}
                     >
                       {blockData?.tx?.tx?.key}
@@ -160,12 +171,13 @@ const DetailPage = ({ txId }) => {
                   {blockData?.tx?.tx?.cbdc_tx_hash && (
                 <Descriptions.Item label="CBDC Transaction Hash">
                   <span
-                    style={{
-                      fontFamily: "monospace",
-                      color:"white",
-                      backgroundColor: "grey",
-                      padding: "2px 4px",
+                    style={{fontFamily: "monospace",
+                      color: "#000",
+                      backgroundColor: "#eae5e5",
                       borderRadius: "4px",
+                      display: "inline-block",
+                      padding: "10px",
+                      fontSize: "12px",
                     }}
                   >
                     {blockData?.tx?.tx?.cbdc_tx_hash}
@@ -186,12 +198,13 @@ const DetailPage = ({ txId }) => {
   <>
     <Descriptions.Item label="Address X">
     <span
-                    style={{
-                      fontFamily: "monospace",
-                      color:"white",
-                      backgroundColor: "grey",
-                      padding: "2px 4px",
+                    style={{fontFamily: "monospace",
+                      color: "#000",
+                      backgroundColor: "#eae5e5",
                       borderRadius: "4px",
+                      display: "inline-block",
+                      padding: "10px",
+                      fontSize: "12px",
                     }}
                   >
       {blockData?.tx?.tx?.input_utxos[0]?.address?.x || blockData?.tx?.tx?.input_utxos[0]?.address || "N/A"}
@@ -199,12 +212,13 @@ const DetailPage = ({ txId }) => {
     </Descriptions.Item>
     <Descriptions.Item label="Address Y">
     <span
-                    style={{
-                      fontFamily: "monospace",
-                      color:"white",
-                      backgroundColor: "grey",
-                      padding: "2px 4px",
+                    style={{fontFamily: "monospace",
+                      color: "#000",
+                      backgroundColor: "#eae5e5",
                       borderRadius: "4px",
+                      display: "inline-block",
+                      padding: "10px",
+                      fontSize: "12px",
                     }}
                     >
       {blockData?.tx?.tx?.input_utxos[0]?.address?.y || blockData?.tx?.tx?.input_utxos[0]?.address || "N/A"}
@@ -218,12 +232,13 @@ const DetailPage = ({ txId }) => {
     </Descriptions.Item>
     <Descriptions.Item label="Generated Transaction ID">
     <span
-                    style={{
-                      fontFamily: "monospace",
-                      color:"white",
-                      backgroundColor: "grey",
-                      padding: "2px 4px",
+                    style={{fontFamily: "monospace",
+                      color: "#000",
+                      backgroundColor: "#eae5e5",
                       borderRadius: "4px",
+                      display: "inline-block",
+                      padding: "10px",
+                      fontSize: "12px",
                     }}
                     >
       {blockData?.tx?.tx?.input_utxos[0]?.gen_tx_id || "N/A"}
@@ -235,12 +250,13 @@ const DetailPage = ({ txId }) => {
     <>
       <Descriptions.Item label="Address X">
       <span
-                    style={{
-                      fontFamily: "monospace",
-                      color:"white",
-                      backgroundColor: "grey",
-                      padding: "2px 4px",
+                    style={{fontFamily: "monospace",
+                      color: "#000",
+                      backgroundColor: "#eae5e5",
                       borderRadius: "4px",
+                      display: "inline-block",
+                      padding: "10px",
+                      fontSize: "12px",
                     }}
                     >
         {blockData?.tx?.tx?.tx?.input_utxos[0]?.address || blockData?.tx?.tx?.tx?.input_utxos[0]?.address || "N/A"}
@@ -248,12 +264,13 @@ const DetailPage = ({ txId }) => {
       </Descriptions.Item>
       <Descriptions.Item label="Address Y">
       <span
-                    style={{
-                      fontFamily: "monospace",
-                      color:"white",
-                      backgroundColor: "grey",
-                      padding: "2px 4px",
+                    style={{fontFamily: "monospace",
+                      color: "#000",
+                      backgroundColor: "#eae5e5",
                       borderRadius: "4px",
+                      display: "inline-block",
+                      padding: "10px",
+                      fontSize: "12px",
                     }}
                     >
         {blockData?.tx?.tx?.tx?.input_utxos[0]?.address?.y || blockData?.tx?.tx?.tx?.input_utxos[0]?.address || "N/A"}
@@ -267,12 +284,13 @@ const DetailPage = ({ txId }) => {
       </Descriptions.Item>
       <Descriptions.Item label="Generated Transaction ID">
         <span
-                    style={{
-                      fontFamily: "monospace",
-                      color:"white",
-                      backgroundColor: "grey",
-                      padding: "2px 4px",
+                    style={{fontFamily: "monospace",
+                      color: "#000",
+                      backgroundColor: "#eae5e5",
                       borderRadius: "4px",
+                      display: "inline-block",
+                      padding: "10px",
+                      fontSize: "12px",
                     }}
                     >
         {blockData?.tx?.tx?.tx?.input_utxos[0]?.gen_tx_id || "N/A"}
@@ -311,12 +329,13 @@ const DetailPage = ({ txId }) => {
       >
         <Descriptions.Item label="Address X">
         <span
-                    style={{
-                      fontFamily: "monospace",
-                      color:"white",
-                      backgroundColor: "grey",
-                      padding: "2px 4px",
+                    style={{fontFamily: "monospace",
+                      color: "#000",
+                      backgroundColor: "#eae5e5",
                       borderRadius: "4px",
+                      display: "inline-block",
+                      padding: "10px",
+                      fontSize: "12px",
                     }}
                     >
           {blockData?.tx?.tx?.output_utxo?.address?.x || "N/A"}
@@ -324,12 +343,13 @@ const DetailPage = ({ txId }) => {
         </Descriptions.Item>
         <Descriptions.Item label="Address Y">
         <span
-                    style={{
-                      fontFamily: "monospace",
-                      color:"white",
-                      backgroundColor: "grey",
-                      padding: "2px 4px",
+                    style={{fontFamily: "monospace",
+                      color: "#000",
+                      backgroundColor: "#eae5e5",
                       borderRadius: "4px",
+                      display: "inline-block",
+                      padding: "10px",
+                      fontSize: "12px",
                     }}
                     >
           {blockData?.tx?.tx?.output_utxo?.address?.y || "N/A"}
@@ -343,12 +363,13 @@ const DetailPage = ({ txId }) => {
         </Descriptions.Item>
         <Descriptions.Item label="Generated Transaction ID">
         <span
-                    style={{
-                      fontFamily: "monospace",
-                      color:"white",
-                      backgroundColor: "grey",
-                      padding: "2px 4px",
+                    style={{fontFamily: "monospace",
+                      color: "#000",
+                      backgroundColor: "#eae5e5",
                       borderRadius: "4px",
+                      display: "inline-block",
+                      padding: "10px",
+                      fontSize: "12px",
                     }}
                     >
           {blockData?.tx?.tx?.output_utxo?.gen_tx_id || "N/A"}
@@ -385,12 +406,13 @@ const DetailPage = ({ txId }) => {
       >
         <Descriptions.Item label="Address">
         <span
-                    style={{
-                      fontFamily: "monospace",
-                      color:"white",
-                      backgroundColor: "grey",
-                      padding: "2px 4px",
+                    style={{fontFamily: "monospace",
+                      color: "#000",
+                      backgroundColor: "#eae5e5",
                       borderRadius: "4px",
+                      display: "inline-block",
+                      padding: "10px",
+                      fontSize: "12px",
                     }}
                     >
           {utxo?.address || "N/A"}
@@ -404,12 +426,13 @@ const DetailPage = ({ txId }) => {
         </Descriptions.Item>
         <Descriptions.Item label="Generated Transaction ID">
         <span
-                    style={{
-                      fontFamily: "monospace",
-                      color:"white",
-                      backgroundColor: "grey",
-                      padding: "2px 4px",
+                    style={{fontFamily: "monospace",
+                      color: "#000",
+                      backgroundColor: "#eae5e5",
                       borderRadius: "4px",
+                      display: "inline-block",
+                      padding: "10px",
+                      fontSize: "12px",
                     }}
                     >
           {utxo.gen_tx_id || "N/A"}
@@ -455,12 +478,13 @@ const DetailPage = ({ txId }) => {
         </Descriptions.Item>
         <Descriptions.Item label="Generated Transaction ID">
         <span
-                    style={{
-                      fontFamily: "monospace",
-                      color:"white",
-                      backgroundColor: "grey",
-                      padding: "2px 4px",
+                    style={{fontFamily: "monospace",
+                      color: "#000",
+                      backgroundColor: "#eae5e5",
                       borderRadius: "4px",
+                      display: "inline-block",
+                      padding: "10px",
+                      fontSize: "12px",
                     }}
                     >
           {utxo.gen_tx_id || "N/A"}
