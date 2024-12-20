@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Table, Tag, Tooltip, message, Spin, Button } from 'antd';
-// import './Table.css'
+import './Table.css'
 
 // Utility function to abbreviate long strings
 const abbreviateString = (str, maxLength = 20) => {
