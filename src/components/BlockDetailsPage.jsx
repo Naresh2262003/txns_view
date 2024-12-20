@@ -185,7 +185,8 @@ const DetailPage = ({ txId }) => {
                 </Descriptions.Item>
               )}
                   <Descriptions.Item label="Proof">
-                   <ReadMore text={blockData?.tx?.tx?.proof || "N/A"} maxLines={3} />
+                   <ReadMore text={ blockData?.tx?.tx?.proof || blockData?.tx?.tx?.tx?.proof || "N/A"} maxLines={3} />
+                   
                   </Descriptions.Item>
                   {blockData?.tx?.tx?.signatures?.[0] && (
                 <Descriptions.Item label="Signatures">
