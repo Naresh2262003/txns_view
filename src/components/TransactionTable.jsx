@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Table, Tag, Tooltip, message, Spin, Button } from 'antd';
-import './Table.css'
+// import './Table.css'
 
 // Utility function to abbreviate long strings
 const abbreviateString = (str, maxLength = 20) => {
@@ -27,7 +27,7 @@ const TransactionDetails = () => {
 
   // Function to fetch transaction data
   const fetchTransactionData = () => {
-    setLoading(true);
+    // setLoading(true);
     axios
       .get('https://xtsp-go.niceriver-b5ad439b.centralindia.azurecontainerapps.io/v1/api/txs') 
       .then((response) => {

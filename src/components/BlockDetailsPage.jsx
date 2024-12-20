@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Card, Typography, Descriptions, Spin, message, Layout, Row, Col } from "antd";
 import './DetailsPage.css'
+import ReadMore from "./Readmore.jsx";
 
 const { Title } = Typography;
 const { Content } = Layout;
@@ -105,7 +106,7 @@ const DetailPage = ({ txId }) => {
                     </Descriptions.Item>
                   )}
                   <Descriptions.Item label="Proof">
-                    {blockData?.tx?.tx?.proof || "N/A"}
+                   <ReadMore text={blockData?.tx?.tx?.proof || "N/A"} maxLines={3} />
                   </Descriptions.Item>
                   {(blockData?.tx?.tx?.signatures?.[0] || blockData?.tx?.tx?.signature) && (
                     <Descriptions.Item label="Signatures">
@@ -206,7 +207,8 @@ const DetailPage = ({ txId }) => {
                       {utxo?.address || "N/A"}
                     </Descriptions.Item>
                     <Descriptions.Item label="Amount">
-                      {utxo.amount || "N/A"}
+                      {/* {utxo.amount || "N/A"} */}
+                      <ReadMore text={utxo.amount || "N/A"} maxLines={3} />
                     </Descriptions.Item>
                     <Descriptions.Item label="Ephemeral Key">
                       {utxo.ephemeral_key || "N/A"}
@@ -232,7 +234,8 @@ const DetailPage = ({ txId }) => {
                       {utxo?.address || "N/A"}
                     </Descriptions.Item>
                     <Descriptions.Item label="Amount">
-                      {utxo.amount || "N/A"}
+                      {/* {utxo.amount || "N/A"} */}
+                      <ReadMore text={utxo.amount || "N/A"} maxLines={3} />
                     </Descriptions.Item>
                     <Descriptions.Item label="Ephemeral Key">
                       {utxo.ephemeral_key || "N/A"}

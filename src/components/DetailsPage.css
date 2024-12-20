@@ -6,6 +6,13 @@ body {
     margin: 0;
     padding: 0;
   }
+
+  .read-more {
+    display: inline-block;
+    color: blue;
+    cursor: pointer;
+    margin-top: 4px;
+  }
   
   /* Styling for the card */
   .custom-card {
