@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Layout, Input, Typography, Switch } from "antd";
 import { SearchOutlined, CloseCircleOutlined } from "@ant-design/icons";
-import Logo from '../assets/downloadImg.jpeg';
+import Logo from '../assets/newImg.png';
 
 const { Header } = Layout;
 const { Title } = Typography;
@@ -44,16 +44,16 @@ const HeaderComponent = ({ setSearchData, cardView, setCardView }) => {
         <img 
           src={Logo} 
           alt="Logo"
-          style={{ height: 40, marginRight: 10 }} 
+          style={{ height: 180, marginRight: 10, padding:0 }} 
           onClick={handleClear}
         />
-        <Title level={3} style={{ margin: 0, color: "white" }} onClick={handleClear}>
+        {/* <Title level={3} style={{ margin: 0, color: "white" }} onClick={handleClear}>
           Xaults
-        </Title>
+        </Title> */}
       </div>
 
       {/* Right section: Search bar and toggle */}
-      <div style={{ display: "flex", alignItems: "center" }}>
+      <div style={{ display: "flex", justifyContent: "center" }}>
         <Input
           placeholder="Search Transaction ID"
           prefix={<SearchOutlined />}
@@ -69,13 +69,13 @@ const HeaderComponent = ({ setSearchData, cardView, setCardView }) => {
           onChange={handleSearchChange}
           style={{
             width: 800, 
-            height: 40,
+            height: 45,
             marginRight: 16
           }}
         />
         
         {/* Toggle for Card View */}
-        <div>
+        {/* <div>
           <span style={{ color: "white", marginRight: 8 }}>
             {`Card View: ${cardView ? 'On' : 'Off'}`}
           </span>
@@ -83,7 +83,7 @@ const HeaderComponent = ({ setSearchData, cardView, setCardView }) => {
             checked={cardView}
             onChange={handleToggleChange}  // Toggle the cardView state
           />
-        </div>
+        </div> */}
       </div>
     </Header>
   );
