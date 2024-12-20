@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Card, Typography, Descriptions, Spin, message, Layout, Row, Col } from "antd";
+import './DetailsPage.css'
 
 const { Title } = Typography;
 const { Content } = Layout;
+
 
 // Helper function to parse address
 const parseAddress = (address) => {
@@ -68,16 +70,18 @@ const DetailPage = ({ txId }) => {
           title={`Details of Input UTXO's`}
           style={{ color: "white", marginBottom: "24px" }}
           headStyle={{ color: "white", backgroundColor: "#1C2531" }}
+          className="custom-card"
         >
           <Row gutter={16}>
             <Col xs={24} md={24}>
               <Card
                 style={{ color: "white" }}
                 headStyle={{ color: "white", backgroundColor: "#1C2531" }}
+                className="custom-card"
               >
-                <Descriptions bordered column={1} style={{ color: "white" }}>
-                  <Descriptions.Item label="Time">{blockData.time}</Descriptions.Item>
-                  <Descriptions.Item label="Comments">
+                <Descriptions bordered column={1} className="custom-descriptions" style={{color:"white"}}>
+                  <Descriptions.Item label="Time" >{blockData.time}</Descriptions.Item>
+                  <Descriptions.Item label="Comments" >
                     {blockData?.tx?.comments?.[0] || "N/A"}
                   </Descriptions.Item>
                   {blockData?.tx?.tx?.amount && (
@@ -101,7 +105,7 @@ const DetailPage = ({ txId }) => {
                     </Descriptions.Item>
                   )}
                   <Descriptions.Item label="Proof">
-                    {blockData?.tx?.tx?.proof}
+                    {blockData?.tx?.tx?.proof || "N/A"}
                   </Descriptions.Item>
                   {(blockData?.tx?.tx?.signatures?.[0] || blockData?.tx?.tx?.signature) && (
                     <Descriptions.Item label="Signatures">
@@ -127,7 +131,25 @@ const DetailPage = ({ txId }) => {
     </Descriptions.Item>
   </>
 ) : (
-  <Descriptions.Item>No Input UTXOs Available</Descriptions.Item>
+  blockData?.tx?.tx?.tx?.input_utxos?.length > 0 ? (
+    <>
+      <Descriptions.Item label="Address X">
+        {blockData?.tx?.tx?.tx?.input_utxos[0]?.address || blockData?.tx?.tx?.tx?.input_utxos[0]?.address || "N/A"}
+      </Descriptions.Item>
+      <Descriptions.Item label="Address Y">
+        {blockData?.tx?.tx?.tx?.input_utxos[0]?.address?.y || blockData?.tx?.tx?.tx?.input_utxos[0]?.address || "N/A"}
+      </Descriptions.Item>
+      <Descriptions.Item label="Amount">
+        {JSON.stringify(blockData?.tx?.tx?.tx?.input_utxos[0]?.amount) || "N/A"}
+      </Descriptions.Item>
+      <Descriptions.Item label="Ephemeral Key">
+        {JSON.stringify(blockData?.tx?.tx?.tx?.input_utxos[0]?.ephemeral_key) || "N/A"}
+      </Descriptions.Item>
+      <Descriptions.Item label="Generated Transaction ID">
+        {blockData?.tx?.tx?.tx?.input_utxos[0]?.gen_tx_id || "N/A"}
+      </Descriptions.Item>
+    </>
+  ):<></>
 )}
                   <Descriptions.Item label="Transaction ID">
                     {blockData?.tx_id}
@@ -148,8 +170,9 @@ const DetailPage = ({ txId }) => {
                   title={`Output UTXO`}
                   style={{ color: "white", marginTop: 24 }}
                   headStyle={{ color: "white", backgroundColor: "#1C2531" }}
+                  className="custom-card"
                 >
-                  <Descriptions column={1} style={{ color: "white" }}>
+                  <Descriptions bordered column={1} style={{ color: "white" }} className="custom-descriptions">
                     <Descriptions.Item label="Address X">
                       {blockData?.tx?.tx?.output_utxo?.address?.x || "N/A"}
                     </Descriptions.Item>
@@ -176,9 +199,36 @@ const DetailPage = ({ txId }) => {
                   title={`Output UTXO ${index + 1}`}
                   style={{ color: "white", marginTop: 24 }}
                   headStyle={{ color: "white", backgroundColor: "#1C2531" }}
+                  className="custom-card"
                 >
-                  <Descriptions column={1} style={{ color: "white" }}>
+                  <Descriptions bordered column={1} style={{ color: "white" }} className="custom-descriptions">
                     <Descriptions.Item label="Address">
+                      {utxo?.address || "N/A"}
+                    </Descriptions.Item>
+                    <Descriptions.Item label="Amount">
+                      {utxo.amount || "N/A"}
+                    </Descriptions.Item>
+                    <Descriptions.Item label="Ephemeral Key">
+                      {utxo.ephemeral_key || "N/A"}
+                    </Descriptions.Item>
+                    <Descriptions.Item label="Generated Transaction ID">
+                      {utxo.gen_tx_id || "N/A"}
+                    </Descriptions.Item>
+                  </Descriptions>
+                </Card>
+              </Col>
+            ))}
+
+{blockData?.tx?.tx?.tx?.output_utxos?.map((utxo, index) => (
+              <Col xs={24} md={12} key={index}>
+                <Card
+                  title={`Output UTXO ${index + 1}`}
+                  style={{ color: "white", marginTop: 24 }}
+                  headStyle={{ color: "white", backgroundColor: "#1C2531" }}
+                  className="custom-card"
+                >
+                  <Descriptions bordered column={1} style={{ color: "white" }} className="custom-descriptions">
+                    <Descriptions.Item label="Address" >
                       {utxo?.address || "N/A"}
                     </Descriptions.Item>
                     <Descriptions.Item label="Amount">

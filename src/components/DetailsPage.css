@@ -1,0 +1,72 @@
+/* Global styles for the body */
+body {
+    font-family: "Roboto", Arial, sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Styling for the card */
+  .custom-card {
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 24px;
+  }
+  
+  /* Styling for card headers */
+  .custom-card .ant-card-head {
+    font-size: 18px;
+    font-weight: 600;
+    background-color: #1c2531;
+    color: white;
+  }
+  
+  /* Styling for descriptions */
+  .custom-descriptions .ant-descriptions-item-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #555;
+  }
+  
+  .custom-descriptions .ant-descriptions-item-content {
+    
+    font-family: "Roboto", Arial, sans-serif;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  /* Styling for the error title when transaction not found */
+  .error-title {
+    color: #ff4d4f;
+    font-weight: 700;
+  }
+  
+  /* Responsive design for smaller screens */
+  @media (max-width: 768px) {
+    .custom-card {
+      font-size: 14px;
+    }
+    .custom-descriptions .ant-descriptions-item-content {
+      font-size: 14px;
+    }
+  }
+  
+  /* Styling for Layout content */
+  .ant-layout-content {
+    padding: 24px;
+  }
+  
+  /* Styling for Spin component */
+  .ant-spin {
+    margin-top: 50px;
+  }
+  
+  /* Styling for Transaction Not Found message */
+  .transaction-not-found {
+    padding: 2rem;
+    text-align: center;
+    font-size: 18px;
+  }
+  

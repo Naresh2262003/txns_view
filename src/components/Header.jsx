@@ -1,12 +1,13 @@
+
 import React, { useState } from "react";
-import { Layout, Input, Typography } from "antd";
+import { Layout, Input, Typography, Switch } from "antd";
 import { SearchOutlined, CloseCircleOutlined } from "@ant-design/icons";
-import Logo from '../assets/downloadImg.jpeg'
+import Logo from '../assets/downloadImg.jpeg';
 
 const { Header } = Layout;
 const { Title } = Typography;
 
-const HeaderComponent = ({ setSearchData }) => {
+const HeaderComponent = ({ setSearchData, cardView, setCardView }) => {
   const [searchText, setSearchText] = useState("");
 
   // Handle changes to the search input
@@ -21,11 +22,16 @@ const HeaderComponent = ({ setSearchData }) => {
     setSearchData(""); 
   };
 
+  // Handle toggle change
+  const handleToggleChange = (checked) => {
+    setCardView(checked);  // Update the cardView state based on the toggle
+  };
+
   return (
     <Header
       style={{
         display: "flex",
-        justifyContent: "center", 
+        justifyContent: "space-between", 
         alignItems: "center", 
         color: "white",
         backgroundColor: "#001529",
@@ -33,8 +39,8 @@ const HeaderComponent = ({ setSearchData }) => {
         cursor: "pointer"
       }}
     >
-      <div style={{ position: "absolute", left: 50, display: "flex", alignItems: "center" }}>
-        
+      {/* Left section: Logo and title */}
+      <div style={{ display: "flex", alignItems: "center" }}>
         <img 
           src={Logo} 
           alt="Logo"
@@ -46,26 +52,42 @@ const HeaderComponent = ({ setSearchData }) => {
         </Title>
       </div>
 
-      <Input
-        placeholder="Search Transaction ID"
-        prefix={<SearchOutlined />}
-        suffix={
-          searchText && (
-            <CloseCircleOutlined
-              onClick={handleClear}
-              style={{ color: "#999", cursor: "pointer" }}
-            />
-          )
-        }
-        value={searchText}
-        onChange={handleSearchChange}
-        style={{
-          width: 800, 
-          height: 40,
-        }}
-      />
+      {/* Right section: Search bar and toggle */}
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <Input
+          placeholder="Search Transaction ID"
+          prefix={<SearchOutlined />}
+          suffix={
+            searchText && (
+              <CloseCircleOutlined
+                onClick={handleClear}
+                style={{ color: "#999", cursor: "pointer" }}
+              />
+            )
+          }
+          value={searchText}
+          onChange={handleSearchChange}
+          style={{
+            width: 800, 
+            height: 40,
+            marginRight: 16
+          }}
+        />
+        
+        {/* Toggle for Card View */}
+        <div>
+          <span style={{ color: "white", marginRight: 8 }}>
+            {`Card View: ${cardView ? 'On' : 'Off'}`}
+          </span>
+          <Switch
+            checked={cardView}
+            onChange={handleToggleChange}  // Toggle the cardView state
+          />
+        </div>
+      </div>
     </Header>
   );
 };
 
 export default HeaderComponent;
+
