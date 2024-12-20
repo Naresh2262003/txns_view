@@ -64,11 +64,11 @@ const TransactionDetails = () => {
   useEffect(() => {
     fetchTransactionData(); 
 
-    // const intervalId = setInterval(() => {
-    //   fetchTransactionData();
-    // }, 10000);
+    const intervalId = setInterval(() => {
+      fetchTransactionData();
+    }, 10000);
 
-    // return () => clearInterval(intervalId);
+    return () => clearInterval(intervalId);
   }, [table]);
 
   const handleButtonClick = (type) => {
