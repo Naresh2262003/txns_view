@@ -27,7 +27,7 @@ const TransactionDetails = () => {
 
   // Function to fetch transaction data
   const fetchTransactionData = () => {
-    // setLoading(true);
+    setLoading(true);
     axios
       .get('https://xtsp-go.niceriver-b5ad439b.centralindia.azurecontainerapps.io/v1/api/txs') 
       .then((response) => {
@@ -55,7 +55,7 @@ const TransactionDetails = () => {
         setLoading(false);
       })
       .finally(() => {
-        // setLoading(false);
+        setLoading(false);
         setButtonLoading(false);
       });
   };
