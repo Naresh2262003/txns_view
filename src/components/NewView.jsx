@@ -6,7 +6,7 @@ import { Card, Descriptions, Row, Col, Spin, message, Tooltip } from "antd";
 const TransactionDetails = () => {
   const [transactionData, setTransactionData] = useState([]);
   const [loading, setLoading] = useState(true);
-    const [table, setTable] = useState("transfer_x");
+    const [table, setTable] = useState(localStorage.getItem("table")|| "load_x");
 
   // Fetch transaction data
   const fetchTransactionData = () => {

@@ -44,6 +44,8 @@ const TransactionDetails = () => {
           return timeB - timeA; // Descending order
         });
 
+        localStorage.setItem("table",table);
+
         setTransactionData(dataToset);
         setLoading(false);
       })
@@ -73,6 +75,7 @@ const TransactionDetails = () => {
     if (buttonLoading) return; // Prevent concurrent requests
     setButtonLoading(true);
     setTable(type);
+    localStorage.setItem("table",type);
   };
 
   // Formatting the fetched data for table display
