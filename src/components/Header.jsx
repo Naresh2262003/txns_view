@@ -3,12 +3,14 @@ import React, { useState } from "react";
 import { Layout, Input, Typography, Switch } from "antd";
 import { SearchOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import Logo from '../assets/newImg.png';
+import { useNavigate } from "react-router-dom";
 
 const { Header } = Layout;
 const { Title } = Typography;
 
 const HeaderComponent = ({ setSearchData, cardView, setCardView }) => {
   const [searchText, setSearchText] = useState("");
+  const navigate = useNavigate(); 
 
   // Handle changes to the search input
   const handleSearchChange = (e) => {
@@ -16,10 +18,18 @@ const HeaderComponent = ({ setSearchData, cardView, setCardView }) => {
     setSearchData(e.target.value); 
   };
 
+  // Handle search input submission
+  const handleSearchSubmit = () => {
+    if (searchText.trim()) {
+      navigate(`/txns_view/${searchText}`); // Navigate to the dynamic route
+    }
+  };
+
   // Clear the input value when the clear button is clicked
   const handleClear = () => {
     setSearchText(""); 
     setSearchData(""); 
+    navigate(`/txns_view/`);
   };
 
   // Handle toggle change
@@ -67,6 +77,7 @@ const HeaderComponent = ({ setSearchData, cardView, setCardView }) => {
           }
           value={searchText}
           onChange={handleSearchChange}
+          onPressEnter={handleSearchSubmit}
           style={{
             width: 800, 
             height: 45,

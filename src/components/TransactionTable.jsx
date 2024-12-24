@@ -29,7 +29,7 @@ const TransactionDetails = () => {
   const fetchTransactionData = () => {
     // setLoading(true);
     axios
-      .get('https://xtsp-go.niceriver-b5ad439b.centralindia.azurecontainerapps.io/v1/api/txs') 
+      .get(' https://xtsp-go.niceriver-b5ad439b.centralindia.azurecontainerapps.io/v1/api/txs/?proof=false') 
       .then((response) => {
         console.log(response.data);
         

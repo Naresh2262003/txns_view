@@ -3,6 +3,7 @@ import axios from "axios";
 import { Card, Typography, Descriptions, Spin, message, Layout, Row, Col } from "antd";
 import './DetailsPage.css'
 import ReadMore from "./Readmore.jsx";
+import { useParams } from "react-router-dom"; 
 
 const { Title } = Typography;
 const { Content } = Layout;
@@ -35,48 +36,54 @@ const formatTime = (isoTime) => {
 const DetailPage = ({ txId }) => {
   const [transaction, setTransaction] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { id } = useParams(); 
+
+  console.log("id is ", id);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          "https://xtsp-go.niceriver-b5ad439b.centralindia.azurecontainerapps.io/v1/api/txs"
-        );
-        const transactions = response.data;
 
-        // Find the transaction matching txId
-        const foundTx = transactions.find((tx) => tx.tx_id === txId);
-        if (foundTx) {
-          setTransaction(foundTx);
-        } else {
-          message.error("Transaction not found.");
-        }
-      } catch (error) {
-        message.error("Failed to fetch transactions. Please try again.");
-      } finally {
-        setLoading(false);
+  const fetchData = async () => {
+    try {
+      console.log("Fetching transaction details...");
+      const response = await axios.get(
+        `https://xtsp-go.niceriver-b5ad439b.centralindia.azurecontainerapps.io/v1/api/txs/?tx_id=${id}`
+      );
+      const transactions = response.data;
+
+      // Set the first transaction from the API response (adjust this if logic changes)
+      if (transactions && transactions.length > 0) {
+        setTransaction(transactions[0]);
+      } else {
+        message.error("Transaction not found.");
       }
-    };
+    } catch (error) {
+      console.error("Error fetching transaction:", error);
+      message.error("Failed to fetch transactions. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    fetchData();
-  }, [txId]);
+  fetchData();
+}, [txId]);
 
-  if (loading) {
-    return (
-      <div style={{ textAlign: "center", padding: "2rem" }}>
-        <Spin size="large" />
-      </div>
-    );
-  }
+if (loading) {
+  return (
+    <div style={{ textAlign: "center", padding: "2rem" }}>
+      <Spin size="large" />
+    </div>
+  );
+}
 
-  if (!transaction) {
-    return (
-      <div style={{ padding: "2rem", textAlign: "center" }}>
-        <Title level={2}>Transaction Not Found</Title>
-      </div>
-    );
-  }
+if (!transaction) {
+  return (
+    <div style={{ padding: "2rem", textAlign: "center" }}>
+      <Title level={2}>Transaction Not Found</Title>
+    </div>
+  );
+}
 
+  console.log("hey!", transaction);
   const blockData = transaction;
 
   return (
