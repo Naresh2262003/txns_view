@@ -22,6 +22,8 @@ const HeaderComponent = ({ setSearchData, cardView, setCardView }) => {
   const handleSearchSubmit = () => {
     if (searchText.trim()) {
       navigate(`/txns_view/${searchText}`); // Navigate to the dynamic route
+    }else{
+      navigate(`/txns_view/`);
     }
   };
 
@@ -40,13 +42,20 @@ const HeaderComponent = ({ setSearchData, cardView, setCardView }) => {
   return (
     <Header
       style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100%",
+        zIndex: 1000,
         display: "flex",
         justifyContent: "space-between", 
         alignItems: "center", 
         color: "white",
         backgroundColor: "#001529",
         padding: "0 50px",
-        cursor: "pointer"
+        cursor: "pointer",
+        overflow: "hidden",
+    boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)"
       }}
     >
       {/* Left section: Logo and title */}

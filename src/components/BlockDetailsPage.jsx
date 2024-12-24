@@ -37,16 +37,21 @@ const DetailPage = ({ txId }) => {
   const [transaction, setTransaction] = useState(null);
   const [loading, setLoading] = useState(true);
   const { id } = useParams(); 
+  const [transactionId, settransactionId]= useState(id);
 
   console.log("id is ", id);
 
   useEffect(() => {
+    settransactionId(id);
+  }, [id]);
 
+  useEffect(() => {
+    setLoading(true);
   const fetchData = async () => {
     try {
       console.log("Fetching transaction details...");
       const response = await axios.get(
-        `https://xtsp-go.niceriver-b5ad439b.centralindia.azurecontainerapps.io/v1/api/txs/?tx_id=${id}`
+        `https://xtsp-go.niceriver-b5ad439b.centralindia.azurecontainerapps.io/v1/api/txs/?tx_id=${transactionId}`
       );
       const transactions = response.data;
 
@@ -55,6 +60,7 @@ const DetailPage = ({ txId }) => {
         setTransaction(transactions[0]);
       } else {
         message.error("Transaction not found.");
+        // setTransaction(null);
       }
     } catch (error) {
       console.error("Error fetching transaction:", error);
@@ -65,7 +71,7 @@ const DetailPage = ({ txId }) => {
   };
 
   fetchData();
-}, [txId]);
+}, [transactionId]);
 
 if (loading) {
   return (
