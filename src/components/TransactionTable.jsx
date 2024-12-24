@@ -131,13 +131,14 @@ const TransactionDetails = () => {
       title: 'Transaction ID',
       dataIndex: 'txId',
       key: 'txId',
+      align: 'center',
       render: (text) => (
         <Tooltip title="Click to copy">
           <span
             style={{ cursor: 'pointer', color: '#4096ff' }}
             onClick={() => handleCopy(text)}
           >
-            {abbreviateString(text, 15)}
+            {abbreviateString(text, 25)}
           </span>
         </Tooltip>
       ),
@@ -146,6 +147,7 @@ const TransactionDetails = () => {
       title: 'Status',
       dataIndex: 'txStatus',
       key: 'txStatus',
+      align: 'center',
       render: (status) => (
         <Tag color={status === 'completed' ? 'green' : 'red'}>{status.toUpperCase()}</Tag>
       ),
@@ -154,6 +156,7 @@ const TransactionDetails = () => {
       title: 'Type',
       dataIndex: 'txType',
       key: 'txType',
+      align: 'center',
       render: (type) => (
         <Tag color="blue" style={{ borderRadius: '20px', padding: '2px 10px' }}>
           {type}
@@ -164,6 +167,7 @@ const TransactionDetails = () => {
       title: 'Output Ephemeral Key',
       dataIndex: 'outputEphemeralKey',
       key: 'outputEphemeralKey',
+      align: 'center',
       render: (text) => (
         <Tooltip title="Click to copy">
           <span
@@ -179,13 +183,14 @@ const TransactionDetails = () => {
       title: 'Output Gen Tx ID',
       dataIndex: 'outputGenTxId',
       key: 'outputGenTxId',
+      align: 'center',
       render: (text) => (
         <Tooltip title="Click to copy">
           <span
             style={{ cursor: 'pointer', color: '#4096ff' }}
             onClick={() => handleCopy(text)}
           >
-            {abbreviateString(text, 15)}
+            {abbreviateString(text, 30)}
           </span>
         </Tooltip>
       ),
@@ -194,6 +199,7 @@ const TransactionDetails = () => {
       title: 'Input Ephemeral Key',
       dataIndex: 'inputEphemeralKey',
       key: 'inputEphemeralKey',
+      align: 'center',
       render: (text) => (
         <Tooltip title="Click to copy">
           <span
@@ -209,13 +215,14 @@ const TransactionDetails = () => {
       title: 'Input Gen Tx ID',
       dataIndex: 'inputGenTxId',
       key: 'inputGenTxId',
+      align: 'center',
       render: (text) => (
         <Tooltip title="Click to copy">
           <span
             style={{ cursor: 'pointer', color: '#4096ff' }}
             onClick={() => handleCopy(text)}
           >
-            {abbreviateString(text, 15)}
+            {abbreviateString(text, 30)}
           </span>
         </Tooltip>
       ),
@@ -224,6 +231,7 @@ const TransactionDetails = () => {
       title: 'Amount',
       dataIndex: 'outputAmount',
       key: 'outputAmount',
+      align: 'center',
       render: (value) => {
         const valueStr = JSON.stringify(value);
         const maxLength = 10; 
@@ -237,6 +245,7 @@ const TransactionDetails = () => {
       title: 'Address',
       dataIndex: 'address',
       key: 'address',
+      align: 'center',
       render: (address) => (
         <div>
           <Tooltip title="Click to copy">
