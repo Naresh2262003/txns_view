@@ -118,6 +118,13 @@ const TransactionDetails = () => {
     });
   };
 
+  
+  const filterColumns = (columns, data) => {
+    return columns.filter((column) =>
+      data.some((item) => item[column.dataIndex] !== "N/A")
+    );
+  };
+
   // Columns for the table
   const columns = [
     {
@@ -252,6 +259,9 @@ const TransactionDetails = () => {
       ),
     },
   ];
+  
+  const formattedData = formatTransactionData(transactionData);
+  const filteredColumns = filterColumns(columns, formattedData);
 
   return (
     <div style={{ padding: '24px', backgroundColor: '#141414' }} className="transaction-container">
@@ -303,8 +313,8 @@ const TransactionDetails = () => {
         <Spin size="large" style={{ display: 'block', margin: 'auto', color: '#fff' }}  className="loading-spinner"/>
       ) : (
         <Table
-          columns={columns}
-          dataSource={formatTransactionData(transactionData)}
+        columns={filteredColumns}
+        dataSource={formattedData}
           pagination={false}
           bordered={false}
           rowClassName="dark-row"
