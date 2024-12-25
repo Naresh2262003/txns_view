@@ -21,7 +21,7 @@ const handleCopy = (text) => {
 
 const TransactionDetails = () => {
   const [transactionData, setTransactionData] = useState([]);
-  const [table, setTable] = useState("load_x");
+  const [table, setTable] = useState(localStorage.getItem("table") || "load_x");
   const [loading, setLoading] = useState(true);
   const [buttonLoading, setButtonLoading] = useState(false);
 
