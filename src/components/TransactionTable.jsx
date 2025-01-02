@@ -296,24 +296,6 @@ const TransactionDetails = () => {
       key: 'outputAmount',
       align: 'center',
       render: (value) => {
-        const valueStr = JSON.stringify(value);
-        const maxLength = 10;
-    
-        if (valueStr.length > maxLength) {
-          return (
-            <div style={{  color: '#000' }}>
-              <span
-                style={{
-                  cursor: 'pointer',
-                  color: '#000',
-                }}
-              >
-                {valueStr.slice(2, 10)}...{valueStr.slice(-10, -2)}
-              </span>
-            </div>
-          );
-        }
-    
         return (
           <div style={{ ...columnStyle, color:"#000" }}>
             <span>{value}</span>

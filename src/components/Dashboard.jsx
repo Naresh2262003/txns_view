@@ -1,4 +1,4 @@
-// Import necessary libraries
+
 import React, { useDebugValue, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Layout, Card, Typography, Row, Col, Progress, Statistic, Button, Skeleton } from 'antd';
@@ -127,7 +127,7 @@ const Dashboard = () => {
             fontFamily: "Roboto, serif",
           }}
         >
-          <Text style={{ color: "#FFFFFF", fontSize: "24px", fontWeight: "bold" }}>
+          <Text style={{ color: "#FFFFFF", fontSize: "34px", fontWeight: "bold" }}>
             Dashboard Overview
           </Text>
         </Header>
