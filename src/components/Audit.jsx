@@ -23,10 +23,10 @@ const Audit = () => {
   };
 
   const handleSearch = async () => {
-    // if (!transactionId) {
-    //   setError("Transaction ID cannot be empty.");
-    //   return;
-    // }
+    if (!transactionId) {
+      setError("Transaction ID cannot be empty.");
+      return;
+    }
 
     searchTransactionById(transactionId, navigate);
 
@@ -72,14 +72,23 @@ const Audit = () => {
               size="large"
               icon={<SearchOutlined />}
               onClick={handleSearch}
+              // style={{
+              //   width: "100%",
+              //   borderRadius: "8px",
+              //   background: "rgb(61, 140, 231)",
+              //   border: "none",
+              //   fontweight: '600'
+              // }}
               style={{
                 width: "100%",
                 borderRadius: "8px",
-                background: "linear-gradient(90deg, #E9D5FF, #F472B6)",
-                border: "none",
+                background: "rgba(61, 140, 231, 0)",
+                border: "2px solid rgb(61, 140, 231)",
+                color:'rgb(61, 140, 231)',
+                fontweight: '600'
               }}
             >
-              Search
+              SEARCH
             </Button>
           </div>
 

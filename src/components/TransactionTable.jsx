@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { Table, Tag, Tooltip, message, Spin, Button, Skeleton } from 'antd';
+// import './TransactionTable.css'
 
 // Utility function to abbreviate long strings
 const abbreviateString = (str, maxLength = 20) => {
@@ -189,9 +190,10 @@ const TransactionDetails = () => {
 
   // Columns for the table
   const headerStyle = {
-    background: 'linear-gradient(90deg, #2e2e48, #1e1e2f)',
+    background: 'linear-gradient(90deg, #5c5c78, #3c3c50)',
+    // backgroundColor: 'grey',
     color: '#fff',
-    fontWeight: 'bold',
+    fontWeight:'500',
     textAlign: 'center',
     padding: '12px',
     borderRadius: '8px',
@@ -200,7 +202,8 @@ const TransactionDetails = () => {
 
   const columnStyle = {
     padding: '10px',
-    background: 'linear-gradient(90deg, #e8f0fc, #d0e7fa)', // Gradient background for columns
+    // background: 'linear-gradient(90deg, #e8f0fc, #d0e7fa)', // Gradient background for columns
+    // background: 'linear-gradient(90deg, #e8f0fc, #d0e7fa)', // Gradient background for columns
     borderRadius: '8px',
     color: '#fff', // Text color
     textAlign: 'center', // Center-align text
@@ -212,17 +215,28 @@ const TransactionDetails = () => {
     {
       title: (
         <div style={{ ...headerStyle }}>
-          Transaction ID
+          TRANSACTION ID
         </div>
       ),
       dataIndex: 'txId',
       key: 'txId',
       align: 'center',
+      
+      onHeaderCell: () => ({
+        style: {
+          backgroundColor: '#000', // Header background color
+        },
+      }),
+      onCell: () => ({
+        style: {
+          backgroundColor: '#000', // Column cell background color
+        },
+      }),
       render: (text) => (
         <div style={columnStyle}>
         <Tooltip title="Click to copy">
           <span
-            style={{ cursor: 'pointer', color: '#000' }}
+            style={{ cursor: 'pointer' }}
             onClick={() => handleCopy(text)}
           >
             {abbreviateString(text, 25)}
@@ -233,11 +247,22 @@ const TransactionDetails = () => {
     },
     {
       title: (
-        <div style={{ ...headerStyle }}>Status</div>
+        <div style={{ ...headerStyle }}>STATUS</div>
       ),
       dataIndex: 'txStatus',
       key: 'txStatus',
       align: 'center',
+      
+      onHeaderCell: () => ({
+        style: {
+          backgroundColor: '#000', // Header background color
+        },
+      }),
+      onCell: () => ({
+        style: {
+          backgroundColor: '#000', // Column cell background color
+        },
+      }),
       render: (status) => (
         <Tag color={status === 'completed' ? 'green' : 'red'}>
           {status.toUpperCase()}
@@ -246,11 +271,22 @@ const TransactionDetails = () => {
     },
     {
       title: (
-        <div style={{ ...headerStyle }}>Type</div>
+        <div style={{ ...headerStyle }}>TYPE</div>
       ),
       dataIndex: 'txType',
       key: 'txType',
       align: 'center',
+      
+      onHeaderCell: () => ({
+        style: {
+          backgroundColor: '#000', // Header background color
+        },
+      }),
+      onCell: () => ({
+        style: {
+          backgroundColor: '#000', // Column cell background color
+        },
+      }),
       render: (type) => (
         <Tag color="blue" style={{ borderRadius: '20px', padding: '2px 10px' }}>
           {type}
@@ -259,17 +295,27 @@ const TransactionDetails = () => {
     },
     {
       title: (
-        <div style={{ ...headerStyle }}>Output Ephemeral Key</div>
+        <div style={{ ...headerStyle }}>OUTPUT EPHEMERAL KEY</div>
       ),
       dataIndex: 'outputEphemeralKey',
       key: 'outputEphemeralKey',
       align: 'center',
+      onHeaderCell: () => ({
+        style: {
+          backgroundColor: '#000', // Header background color
+        },
+      }),
+      onCell: () => ({
+        style: {
+          backgroundColor: '#000', // Column cell background color
+        },
+      }),
       render: (text) => (
         
         <div style={columnStyle}>
         <Tooltip title="Click to copy">
           <span
-            style={{ cursor: 'pointer',color: '#000' }}
+            style={{ cursor: 'pointer' }}
             onClick={() => handleCopy(text)}
           >
             {abbreviateString(text, 15)}
@@ -280,17 +326,27 @@ const TransactionDetails = () => {
     },
     {
       title: (
-        <div style={{ ...headerStyle }}>Output Gen Tx ID</div>
+        <div style={{ ...headerStyle }}>OUTPUT GEN TX ID</div>
       ),
       dataIndex: 'outputGenTxId',
       key: 'outputGenTxId',
       align: 'center',
+      onHeaderCell: () => ({
+        style: {
+          backgroundColor: '#000', // Header background color
+        },
+      }),
+      onCell: () => ({
+        style: {
+          backgroundColor: '#000', // Column cell background color
+        },
+      }),
       render: (text) => (
         
         <div style={columnStyle}>
         <Tooltip title="Click to copy">
           <span
-            style={{ cursor: 'pointer',color: '#000'}}
+            style={{ cursor: 'pointer'}}
             onClick={() => handleCopy(text)}
           >
             {abbreviateString(text, 30)}
@@ -301,16 +357,26 @@ const TransactionDetails = () => {
     },
     {
       title: (
-        <div style={{ ...headerStyle }}>{table!="utxos_x" ? "Input Ephemeral Key": "Ephemeral Key"}</div>
+        <div style={{ ...headerStyle }}>{table!="utxos_x" ? "INPUT EPHEMERAL KEY": "EPHEMERAL KEY"}</div>
       ),
       dataIndex: 'inputEphemeralKey',
       key: 'inputEphemeralKey',
       align: 'center',
+      onHeaderCell: () => ({
+        style: {
+          backgroundColor: '#000', // Header background color
+        },
+      }),
+      onCell: () => ({
+        style: {
+          backgroundColor: '#000', // Column cell background color
+        },
+      }),
       render: (text) => (
         <div style={columnStyle}>
         <Tooltip title="Click to copy">
           <span
-            style={{ cursor: 'pointer',color: '#000' }}
+            style={{ cursor: 'pointer'}}
             onClick={() => handleCopy(text)}
           >
             {abbreviateString(text, 15)}
@@ -321,17 +387,27 @@ const TransactionDetails = () => {
     },
     {
       title: (
-        <div style={{ ...headerStyle }}>{table!="utxos_x" ? "Input Gen Tx id": " Gen Tx id"}</div>
+        <div style={{ ...headerStyle }}>{table!="utxos_x" ? "INPUT GEN TX ID": "GEN TX ID"}</div>
       ),
       dataIndex: 'inputGenTxId',
       key: 'inputGenTxId',
       align: 'center',
+      onHeaderCell: () => ({
+        style: {
+          backgroundColor: '#000', // Header background color
+        },
+      }),
+      onCell: () => ({
+        style: {
+          backgroundColor: '#000', // Column cell background color
+        },
+      }),
       render: (text) => (
         
         <div style={columnStyle}>
         <Tooltip title="Click to copy">
           <span
-            style={{ cursor: 'pointer',color: '#000' }}
+            style={{ cursor: 'pointer'}}
             onClick={() => handleCopy(text)}
           >
             {abbreviateString(text, 30)}
@@ -340,66 +416,72 @@ const TransactionDetails = () => {
         </div>
       ),
     },
-    // {
-    //   title: (
-    //     <div style={{ ...headerStyle }}>Amount</div>
-    //   ),
-    //   dataIndex: 'outputAmount',
-    //   key: 'outputAmount',
-    //   align: 'center',
-    //   render: (value) => {
-    //     return (
-    //       <div style={{ ...columnStyle, color:"#000" }}>
-    //         <span>{value}</span>
-    //       </div>
-    //     );
-    //   },
-    // }, 
     {
       title: (
-        <div style={{ ...headerStyle }}>Amount</div>
+        <div style={{ ...headerStyle }}>AMOUNT</div>
       ),
       dataIndex: 'outputAmount',
       key: 'outputAmount',
       align: 'center',
+      onHeaderCell: () => ({
+        style: {
+          backgroundColor: '#000', // Header background color
+        },
+      }),
+      onCell: () => ({
+        style: {
+          backgroundColor: '#000', // Column cell background color
+        },
+      }),
       render: (value) => {
         const abbreviatedValue = abbreviateString(value, 30); // Abbreviate amount string to 10 characters
         return (
-          <div style={{ ...columnStyle, color: "#000" }}>
+          <div style={{ ...columnStyle, color:"#C9A0DC", fontWeight: 'bold'}}>
             <span>{abbreviatedValue}</span>
           </div>
         );
       },
-    },
+    }, 
     
     {
       title: (
-        <div style={{ ...headerStyle }}>Address</div>
+        <div style={{ ...headerStyle }}>ADDRESS</div>
       ),
       dataIndex: 'address',
       key: 'address',
       align: 'center',
+      onHeaderCell: () => ({
+        style: {
+          backgroundColor: '#000', // Header background color
+        },
+      }),
+      onCell: () => ({
+        style: {
+          backgroundColor: '#000', // Column cell background color
+        },
+      }),
       render: (address) => (
         
         <div >
           <Tooltip title="Click to copy">
             <div
-              style={{ cursor: 'pointer', ...columnStyle, color: '#000' }}
+              style={{ cursor: 'pointer', ...columnStyle }}
               onClick={() => handleCopy(address.x)}
             >
-              <strong>X:</strong> {abbreviateString(address.x, 25)}
+              <strong style={{color:"#C9A0DC"}}>X:</strong> {abbreviateString(address.x, 25)}
             </div>
           </Tooltip>
           <Tooltip title="Click to copy">
             <div
-              style={{ cursor: 'pointer', ...columnStyle, color: '#000'}}
+              style={{ cursor: 'pointer', ...columnStyle}}
               onClick={() => handleCopy(address.y)}
             >
-              <strong>Y:</strong> {abbreviateString(address.y, 25)}
+              <strong style={{color:"#C9A0DC"}}>Y:</strong> {abbreviateString(address.y, 25)}
             </div>
           </Tooltip>
         </div>
       ),
+      
     },
   ];
   
@@ -504,10 +586,11 @@ const TransactionDetails = () => {
           pagination={false}
           bordered={false}
           rowClassName="dark-row"
-          style={{ color: '#fff' }}
+          style={{ color: '#000' , backgroundColor: "#000" }}
 
           className="transaction-table"
-          scroll={{ x: 'max-content' }} 
+          scroll={{ x: 'max-content' }}
+
         />
       )}
     </div>
