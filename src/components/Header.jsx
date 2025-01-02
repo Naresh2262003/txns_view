@@ -31,7 +31,7 @@ const HeaderComponent = ({ setSearchData, cardView, setCardView }) => {
   const handleClear = () => {
     setSearchText(""); 
     setSearchData(""); 
-    navigate(`/txns_view/`);
+    navigate(`/txns_view/dashboard`);
   };
 
   // Handle toggle change

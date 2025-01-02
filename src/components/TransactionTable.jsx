@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
-import { Table, Tag, Tooltip, message, Spin, Button } from 'antd';
+import { Table, Tag, Tooltip, message, Spin, Button, Skeleton } from 'antd';
 // import './Table.css'
 
 // Utility function to abbreviate long strings
@@ -25,6 +25,9 @@ const TransactionDetails = () => {
   const [loading, setLoading] = useState(true);
   const [buttonLoading, setButtonLoading] = useState(false);
 
+  // Track the previous transactionData with useRef to compare
+  const prevTransactionDataRef = useRef();
+
   // Function to fetch transaction data
   const fetchTransactionData = () => {
     // setLoading(true);
@@ -33,7 +36,7 @@ const TransactionDetails = () => {
       .then((response) => {
         console.log(response.data);
         
-        const dataToset = response.data.filter((tx) => tx.tx_type == table);
+        const dataToset = table!='utxos_x' ? response.data.filter((tx) => tx.tx_type == table): response.data;
         console.log("load dat  u a", dataToset);
         // setTransactionData(response.data);
 
@@ -44,9 +47,16 @@ const TransactionDetails = () => {
           return timeB - timeA; // Descending order
         });
 
+        if (JSON.stringify(prevTransactionDataRef.current) !== JSON.stringify(dataToset)) {
+          setTransactionData(dataToset);
+          message.success('New UTXO found!');
+        }
+
+        prevTransactionDataRef.current = dataToset;
+
         localStorage.setItem("table",table);
 
-        setTransactionData(dataToset);
+        // setTransactionData(dataToset);
         setLoading(false);
       })
       .catch((error) => {
@@ -62,13 +72,14 @@ const TransactionDetails = () => {
 
   // Fetch transaction data initially and every 10 seconds
   useEffect(() => {
+    console.log("I am heer")
     fetchTransactionData(); 
 
-    const intervalId = setInterval(() => {
-      fetchTransactionData();
-    }, 10000);
+    // const intervalId = setInterval(() => {
+    //   fetchTransactionData();
+    // }, 10000);
 
-    return () => clearInterval(intervalId);
+    // return () => clearInterval(intervalId);
   }, [table]);
 
   const handleButtonClick = (type) => {
@@ -274,52 +285,94 @@ const TransactionDetails = () => {
 
   return (
     <div style={{ padding: '24px', backgroundColor: '#141414' }} className="transaction-container">
-     <div style={{ marginBottom: '16px', textAlign: 'center' }} className="button-group">
-  <Button
-    type={table === "load_x" ? "primary" : "default"}
-    style={{
-      marginRight: '8px',
-      backgroundColor: table === "load_x" ? '#1890ff' : '#f0f0f0', // Lighter background for inactive buttons
-      color: table === "load_x" ? '#fff' : '#000', // Dark text for inactive buttons for contrast
-      border: table === "load_x" ? '1px solid #1890ff' : '1px solid #d9d9d9', // Lighter border for inactive buttons
-      transition: 'all 0.3s ease',
-      
-    }}
-          disabled={buttonLoading}
-          onClick={() => handleButtonClick("load_x")}
-  >
-    Load
-  </Button>
-  <Button
-    type={table === "unload_x" ? "primary" : "default"}
-    style={{
-      marginRight: '8px',
-      backgroundColor: table === "unload_x" ? '#1890ff' : '#f0f0f0',
-      color: table === "unload_x" ? '#fff' : '#000',
-      border: table === "unload_x" ? '1px solid #1890ff' : '1px solid #d9d9d9',
-      transition: 'all 0.3s ease',
-    }}
-          disabled={buttonLoading}
-          onClick={() => handleButtonClick("unload_x")}
-  >
-    Unload
-  </Button>
-  <Button
-    type={table === "transfer_x" ? "primary" : "default"}
-    style={{
-      backgroundColor: table === "transfer_x" ? '#1890ff' : '#f0f0f0',
-      color: table === "transfer_x" ? '#fff' : '#000',
-      border: table === "transfer_x" ? '1px solid #1890ff' : '1px solid #d9d9d9',
-      transition: 'all 0.3s ease',
-    }}
-          disabled={buttonLoading}
-          onClick={() => handleButtonClick("transfer_x")}
-  >
-    Transfer
-  </Button>
-</div>
+<div style={{ display: 'flex', justifyContent: 'space-evenly', marginBottom: '16px', textAlign: 'center' }} className="tab-group">
+      <div
+        onClick={() => handleButtonClick("load_x")}
+        style={{
+          cursor: 'pointer',
+          borderBottom: table === "load_x" ? '3px solid #1890ff' : '3px solid transparent',
+          padding: '8px 16px',
+          color: table === "load_x" ? '#1890ff' : '#fff',
+          transition: 'all 0.3s ease',
+          fontWeight: table === "load_x" ? 'bold' : 'normal'
+        }}
+      >
+        Load
+      </div>
+      <div
+        onClick={() => handleButtonClick("unload_x")}
+        style={{
+          cursor: 'pointer',
+          borderBottom: table === "unload_x" ? '3px solid #1890ff' : '3px solid transparent',
+          padding: '8px 16px',
+          color: table === "unload_x" ? '#1890ff' : '#fff',
+          transition: 'all 0.3s ease',
+          fontWeight: table === "unload_x" ? 'bold' : 'normal'
+        }}
+      >
+        Unload
+      </div>
+      <div
+        onClick={() => handleButtonClick("transfer_x")}
+        style={{
+          cursor: 'pointer',
+          borderBottom: table === "transfer_x" ? '3px solid #1890ff' : '3px solid transparent',
+          padding: '8px 16px',
+          color: table === "transfer_x" ? '#1890ff' : '#fff',
+          transition: 'all 0.3s ease',
+          fontWeight: table === "transfer_x" ? 'bold' : 'normal'
+        }}
+      >
+        Transfer
+      </div>
+      <div
+        onClick={() => handleButtonClick("utxos_x")}
+        style={{
+          cursor: 'pointer',
+          borderBottom: table === "utxos_x" ? '3px solid #1890ff' : '3px solid transparent',
+          padding: '8px 16px',
+          color: table === "utxos_x" ? '#1890ff' : '#fff',
+          transition: 'all 0.3s ease',
+          fontWeight: table === "utxos_x" ? 'bold' : 'normal'
+        }}
+      >
+        UTXOs
+      </div>
+    </div>
       {loading ? (
-        <Spin size="large" style={{ display: 'block', margin: 'auto', color: '#fff' }}  className="loading-spinner"/>
+        <div style={{ padding: '24px', backgroundColor: '#141414' }} className="transaction-container">
+        {/* Skeleton for Tabs */}
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-evenly',
+            marginBottom: '16px',
+            textAlign: 'center',
+          }}
+          className="tab-group"
+        >
+          {[1, 2, 3, 4].map((_, index) => (
+            <div
+              key={index}
+              style={{
+                cursor: 'pointer',
+                borderBottom: '3px solid transparent',
+                padding: '8px 16px',
+                color: '#fff',
+                transition: 'all 0.3s ease',
+                fontWeight: 'normal',
+              }}
+            >
+              <Skeleton.Input active={true} size="small" style={{ width: 60 }} />
+            </div>
+          ))}
+        </div>
+    
+        {/* Skeleton for Table */}
+        <div>
+          <Skeleton active={true} paragraph={{ rows: 6 }} className="table-skeleton" />
+        </div>
+      </div>
       ) : (
         <Table
         columns={filteredColumns}

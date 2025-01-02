@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Card, Typography, Descriptions, Spin, message, Layout, Row, Col } from "antd";
+import { Card, Typography, Descriptions, Spin, message, Layout, Row, Col, Alert , Skeleton} from "antd";
 import './DetailsPage.css'
 import ReadMore from "./Readmore.jsx";
 import { useParams } from "react-router-dom"; 
@@ -64,6 +64,7 @@ const DetailPage = ({ txId }) => {
       }
     } catch (error) {
       console.error("Error fetching transaction:", error);
+      setTransaction(null);
       message.error("Failed to fetch transactions. Please try again.");
     } finally {
       setLoading(false);
@@ -73,17 +74,100 @@ const DetailPage = ({ txId }) => {
   fetchData();
 }, [transactionId]);
 
+const proofButtonHandler = async () => {
+  try {
+    console.log("verifying proof");
+    const response = await axios.get(
+      `https://xtsp-go.niceriver-b5ad439b.centralindia.azurecontainerapps.io/v1/api/xtsp/txs/${transactionId}/verify/`
+    );
+
+    message.success(response.data.message)
+  } catch (error) {
+    message.error(error.message)
+    console.error('Error fetching proof:', error);
+  }
+};
+
 if (loading) {
   return (
-    <div style={{ textAlign: "center", padding: "2rem" }}>
-      <Spin size="large" />
+    <div style={{ textAlign: "center", padding: "2rem", backgroundColor:"black" }}>
+      {/* <Spin size="large" /> */}
+      <Card
+    title={`Details of Input UTXO's`}
+    style={{ color: "white", marginBottom: "24px" }}
+    headStyle={{ color: "white", backgroundColor: "#1C2531" }}
+  >
+    <Row gutter={16}>
+      <Col xs={24} md={24}>
+        <Card
+          style={{
+            color: "white",
+            borderRadius: "8px",
+            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+            backgroundColor: 'white',
+          }}
+          headStyle={{ color: "white" }}
+        >
+          <Descriptions
+            bordered
+            column={1}
+            className="custom-descriptions"
+            style={{
+              color: "white",
+              border: "1px solid #2C3E50",
+              borderRadius: "8px",
+            }}
+            labelStyle={{ width: "300px", fontWeight: "bold" }}
+          >
+            <Descriptions.Item label="Time">
+              <Skeleton.Input active={true} size="small" style={{ width: 200 }} />
+            </Descriptions.Item>
+            <Descriptions.Item label="Transaction ID">
+              <Skeleton.Input active={true} size="small" style={{ width: 300 }} />
+            </Descriptions.Item>
+            <Descriptions.Item label="Transaction Status">
+              <Skeleton.Input active={true} size="small" style={{ width: 150 }} />
+            </Descriptions.Item>
+            <Descriptions.Item label="Transaction Type">
+              <Skeleton.Input active={true} size="small" style={{ width: 100 }} />
+            </Descriptions.Item>
+            <Descriptions.Item label="Amount">
+              <Skeleton.Input active={true} size="small" style={{ width: 150 }} />
+            </Descriptions.Item>
+            <Descriptions.Item label="CBDC Address">
+              <Skeleton.Input active={true} size="small" style={{ width: 250 }} />
+            </Descriptions.Item>
+            <Descriptions.Item label="Key">
+              <Skeleton.Input active={true} size="small" style={{ width: 300 }} />
+            </Descriptions.Item>
+            <Descriptions.Item label="Proof">
+              <Skeleton.Button active={true} size="small" style={{ width: 100 }} />
+            </Descriptions.Item>
+            <Descriptions.Item label="Signatures">
+              <Skeleton.Input active={true} size="small" style={{ width: 300 }} />
+            </Descriptions.Item>
+            <Descriptions.Item label="Address X">
+              <Skeleton.Input active={true} size="small" style={{ width: 200 }} />
+            </Descriptions.Item>
+            <Descriptions.Item label="Address Y">
+              <Skeleton.Input active={true} size="small" style={{ width: 200 }} />
+            </Descriptions.Item>
+            <Descriptions.Item label="Generated Transaction ID">
+              <Skeleton.Input active={true} size="small" style={{ width: 250 }} />
+            </Descriptions.Item>
+          </Descriptions>
+        </Card>
+      </Col>
+    </Row>
+  </Card>
+
     </div>
   );
 }
 
 if (!transaction) {
   return (
-    <div style={{ padding: "2rem", textAlign: "center" }}>
+    <div style={{ height:'100vh' , width: '100%', padding: "2rem", textAlign: "center" }}>
       <Title level={2}>Transaction Not Found</Title>
     </div>
   );
@@ -94,9 +178,9 @@ if (!transaction) {
 
   return (
     <Layout style={{ minHeight: "100vh" , backgroundColor: "#101820"}}>
-      <Content style={{ padding: "24px" }}>
+      <Content style={{ padding: "24px", backgroundColor: "#101820" }}>
         <Card
-          title={`Details of Input UTXO's`}
+          title={`Details of UTXO's`}
           style={{ color: "white", marginBottom: "24px" }}
           headStyle={{ color: "white", backgroundColor: "#1C2531" }}
         >
@@ -105,8 +189,10 @@ if (!transaction) {
               <Card
                 style={{ color: "white" ,
                   borderRadius: "8px",
-                  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",}}
-                headStyle={{ color: "white", backgroundColor: "#1C2531" }}
+                  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+                  backgroundColor: 'white'
+                }}
+                headStyle={{ color: "white" }}
               >
                 <Descriptions bordered column={1} className="custom-descriptions" style={{color:"white", border: "1px solid #2C3E50",
                 borderRadius: "8px",}} labelStyle={{ width: "300px", fontWeight: "bold" }}>
@@ -197,7 +283,29 @@ if (!transaction) {
                   </span>
                 </Descriptions.Item>
               )}
-                  <Descriptions.Item label="Proof">
+                  <Descriptions.Item label={
+                    <div style={{ display: 'flex', alignItems: 'center' , justifyContent:'space-between' }}>
+                      Proof
+                      <button
+    style={{
+      marginRight: '50px',
+      padding: '8px 16px',
+      fontSize: '14px',
+      cursor: 'pointer',
+      backgroundColor: '#007bff', 
+      color: 'white',
+      border: 'none',
+      borderRadius: '4px', 
+      transition: 'all 0.3s ease', 
+    }}
+    onClick={proofButtonHandler}
+    onMouseEnter={(e) => e.target.style.backgroundColor = '#0056b3'} // Darker on hover
+    onMouseLeave={(e) => e.target.style.backgroundColor = '#007bff'} // Revert back to original color
+  >
+    Proof
+  </button>
+                    </div>
+                  }>
                    <ReadMore text={ blockData?.tx?.tx?.proof || blockData?.tx?.tx?.tx?.proof || "N/A"} maxLines={3} />
                    
                   </Descriptions.Item>
@@ -208,8 +316,114 @@ if (!transaction) {
                   </span>
                 </Descriptions.Item>
               )}
-                  {blockData?.tx?.tx?.input_utxos?.length > 0 ? (
-  <>
+    </Descriptions>
+  </Card>
+</Col>
+{/* //******************* */}
+{blockData?.tx?.tx?.tx?.input_utxos?.length > 0 ? (
+  <Col xs={24} md={24}>
+    <Card
+      title={`Input UTXO`}
+      style={{
+        color: "white",
+        marginTop: "24px",
+        borderRadius: "8px",
+        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+        backgroundColor: 'white'
+      }}
+      headStyle={{ color: "white", backgroundColor: "#1C2531" }}
+      className="custom-card"
+    >
+      <Descriptions
+        bordered
+        column={1}
+        style={{
+          color: "white",
+          border: "1px solid #2C3E50",
+          borderRadius: "8px",
+        }}
+        labelStyle={{ width: "300px", fontWeight: "bold" }}
+        className="custom-descriptions"
+      >
+        {/* <Descriptions.Item label="Generated Transaction ID">
+    <span
+                    style={{fontFamily: "monospace",
+                      color: "#000",
+                      backgroundColor: "#eae5e5",
+                      borderRadius: "4px",
+                      display: "inline-block",
+                      padding: "10px",
+                      fontSize: "12px",
+                    }}
+                    >
+      {blockData?.tx?.tx?.input_utxos[0]?.gen_tx_id || "N/A"}
+      </span>
+    </Descriptions.Item> */}
+    <Descriptions.Item label="Address ">
+      <span
+                    style={{fontFamily: "monospace",
+                      color: "#000",
+                      backgroundColor: "#eae5e5",
+                      borderRadius: "4px",
+                      display: "inline-block",
+                      padding: "10px",
+                      fontSize: "12px",
+                    }}
+                    >
+        {blockData?.tx?.tx?.tx?.input_utxos[0]?.address || blockData?.tx?.tx?.tx?.input_utxos[0]?.address || "N/A"}
+        </span>
+      </Descriptions.Item>
+      <Descriptions.Item label="Amount">
+        {JSON.stringify(blockData?.tx?.tx?.tx?.input_utxos[0]?.amount) || "N/A"}
+      </Descriptions.Item>
+      <Descriptions.Item label="Ephemeral Key">
+        {JSON.stringify(blockData?.tx?.tx?.tx?.input_utxos[0]?.ephemeral_key) || "N/A"}
+      </Descriptions.Item>
+      <Descriptions.Item label="Generated Transaction ID">
+        <span
+                    style={{fontFamily: "monospace",
+                      color: "#000",
+                      backgroundColor: "#eae5e5",
+                      borderRadius: "4px",
+                      display: "inline-block",
+                      padding: "10px",
+                      fontSize: "12px",
+                    }}
+                    >
+        {blockData?.tx?.tx?.tx?.input_utxos[0]?.gen_tx_id || "N/A"}
+        </span>
+      </Descriptions.Item>
+      </Descriptions>
+    </Card>
+  </Col>
+):<></>
+}
+
+{blockData?.tx?.tx?.input_utxos?.length > 0 ? (
+  <><Col xs={24} md={24}>
+  <Card
+    title={`Input UTXO`}
+    style={{
+      color: "white",
+      marginTop: "24px",
+      borderRadius: "8px",
+      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+      backgroundColor: 'white'
+    }}
+    headStyle={{ color: "white", backgroundColor: "#1C2531" }}
+    className="custom-card"
+  >
+    <Descriptions
+      bordered
+      column={1}
+      style={{
+        color: "white",
+        border: "1px solid #2C3E50",
+        borderRadius: "8px",
+      }}
+      labelStyle={{ width: "300px", fontWeight: "bold" }}
+      className="custom-descriptions"
+    >
     <Descriptions.Item label="Address X">
     <span
                     style={{fontFamily: "monospace",
@@ -258,65 +472,12 @@ if (!transaction) {
       {blockData?.tx?.tx?.input_utxos[0]?.gen_tx_id || "N/A"}
       </span>
     </Descriptions.Item>
+      </Descriptions>
+    </Card>
+  </Col>
   </>
-) : (
-  blockData?.tx?.tx?.tx?.input_utxos?.length > 0 ? (
-    <>
-      <Descriptions.Item label="Address X">
-      <span
-                    style={{fontFamily: "monospace",
-                      color: "#000",
-                      backgroundColor: "#eae5e5",
-                      borderRadius: "4px",
-                      display: "inline-block",
-                      padding: "10px",
-                      fontSize: "12px",
-                    }}
-                    >
-        {blockData?.tx?.tx?.tx?.input_utxos[0]?.address || blockData?.tx?.tx?.tx?.input_utxos[0]?.address || "N/A"}
-        </span>
-      </Descriptions.Item>
-      <Descriptions.Item label="Address Y">
-      <span
-                    style={{fontFamily: "monospace",
-                      color: "#000",
-                      backgroundColor: "#eae5e5",
-                      borderRadius: "4px",
-                      display: "inline-block",
-                      padding: "10px",
-                      fontSize: "12px",
-                    }}
-                    >
-        {blockData?.tx?.tx?.tx?.input_utxos[0]?.address?.y || blockData?.tx?.tx?.tx?.input_utxos[0]?.address || "N/A"}
-        </span>
-      </Descriptions.Item>
-      <Descriptions.Item label="Amount">
-        {JSON.stringify(blockData?.tx?.tx?.tx?.input_utxos[0]?.amount) || "N/A"}
-      </Descriptions.Item>
-      <Descriptions.Item label="Ephemeral Key">
-        {JSON.stringify(blockData?.tx?.tx?.tx?.input_utxos[0]?.ephemeral_key) || "N/A"}
-      </Descriptions.Item>
-      <Descriptions.Item label="Generated Transaction ID">
-        <span
-                    style={{fontFamily: "monospace",
-                      color: "#000",
-                      backgroundColor: "#eae5e5",
-                      borderRadius: "4px",
-                      display: "inline-block",
-                      padding: "10px",
-                      fontSize: "12px",
-                    }}
-                    >
-        {blockData?.tx?.tx?.tx?.input_utxos[0]?.gen_tx_id || "N/A"}
-        </span>
-      </Descriptions.Item>
-    </>
-  ):<></>
-)}
-    </Descriptions>
-  </Card>
-</Col>
-
+) :<></>}
+{/* ******************************************* */}
 {blockData?.tx?.tx?.output_utxo && (
   <Col xs={24} md={24}>
     <Card
@@ -326,6 +487,7 @@ if (!transaction) {
         marginTop: "24px",
         borderRadius: "8px",
         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+        backgroundColor: 'white'
       }}
       headStyle={{ color: "white", backgroundColor: "#1C2531" }}
       className="custom-card"
@@ -403,6 +565,7 @@ if (!transaction) {
         marginTop: "24px",
         borderRadius: "8px",
         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+        backgroundColor: 'white'
       }}
       headStyle={{ color: "white", backgroundColor: "#1C2531" }}
       className="custom-card"
@@ -466,6 +629,7 @@ if (!transaction) {
         marginTop: "24px",
         borderRadius: "8px",
         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+        backgroundColor: 'white'
       }}
       headStyle={{ color: "white", backgroundColor: "#1C2531" }}
       className="custom-card"

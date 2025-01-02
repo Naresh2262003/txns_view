@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Roboto:wght@400;500&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  background-color: #1A1A1A;
+  color: #FFFFFF;
+}
+
+.ant-layout {
+  font-family: "Poppins", sans-serif;
+  background: #1A1A1A;
+}
+.ant-card .ant-statistic-title {
+  font-family: Roboto;
+  color: #FFFFFF !important; /* Force white color */
+}
+.ant-statistic-title {
+  font-size: 14px;
+  font-weight: 600;
+}
+.ant-layout-sider {
+  background: #1F1F1F;
+}
+
+.ant-layout-header {
+  background: #1F1F1F;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Cards */
+.ant-card {
+  font-family: "Roboto", sans-serif;
+  border: none;
+  background: #2C2C2C;
+  color: #FFFFFF;
+  border-radius: 8px;
+}
+
+.ant-card-body {
+  padding: 16px;
+}
+
+/* Typography */
+.ant-typography {
+  margin: 0;
+}
+
+.ant-typography-title {
+  margin: 0 !important;
+  font-weight: bold;
+}
+
+.ant-typography-text {
+  color: #B5B5B5;
+}
+
+/* Buttons */
+.ant-btn-primary {
+  background: linear-gradient(90deg, #7D4AEA, #C084FC);
+  border: none;
+}
+
+.ant-btn-primary:hover {
+  background: linear-gradient(90deg, #C084FC, #7D4AEA);
+}
+
+/* Table */
+.ant-table {
+  background: #2C2C2C;
+  color: #FFFFFF;
+}
+
+.ant-table-thead > tr > th {
+  background: #2C2C2C;
+  color: #B5B5B5;
+  border-bottom: 1px solid #3A3A3A;
+}
+
+.ant-table-tbody > tr > td {
+  border-bottom: 1px solid #3A3A3A;
+}
+
+.ant-badge-status-text {
+  color: #FFFFFF;
+}
+
+/* Progress Bar */
+.ant-progress-bg {
+  background: linear-gradient(90deg, #7D4AEA, #C084FC) !important;
+}
+
+/* Avatar */
+.ant-avatar {
+  background: #3A3A3A;
+  color: #FFFFFF;
+}
