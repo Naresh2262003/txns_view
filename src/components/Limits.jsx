@@ -67,7 +67,7 @@ const LimitsPage = () => {
   return (
     <div
       style={{
-        backgroundColor: 'rgb(31, 31, 31)',
+        backgroundColor: '#141414',
         minHeight: '100vh',
         padding: '20px',
         maxWidth: '100%',
@@ -76,11 +76,11 @@ const LimitsPage = () => {
       <Title level={3} style={{ marginBlock: '20px', textAlign: 'center', color: '#fff' }}>
         Update Allowed Limits
       </Title>
-      <Space direction="vertical" size="large" style={{ width: '100%', backgroundColor: '#2C2C2C' }}>
+      <Space direction="vertical" size="large" style={{ width: '100%', backgroundColor: '#141414' }}>
         {/* XCBDC Load Card */}
         <Card
           style={{
-            background: 'linear-gradient(90deg, #E9D5FF, #F9A8D4)',
+            background: 'rgb(6, 6, 6)',
             color: 'white',
             borderRadius: '10px',
             boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
@@ -89,7 +89,7 @@ const LimitsPage = () => {
         >
           <Row justify="space-between" align="middle">
             <Col>
-              <Title level={5} style={{ color: '#000' }}>
+              <Title level={5} style={{ color: '#FFF' }}>
                 XCBDC Load
               </Title>
               <Text type="secondary" style={{ color: '#595959' }}>
@@ -99,7 +99,7 @@ const LimitsPage = () => {
             <Col>
               <Tooltip title="Edit Load Limit">
                 <EditOutlined
-                  style={{ fontSize: '18px', cursor: 'pointer', color: '#000' }}
+                  style={{ fontSize: '18px', cursor: 'pointer', color: '#fff' }}
                   onClick={handleEditClick}
                 />
               </Tooltip>
@@ -132,7 +132,7 @@ const LimitsPage = () => {
         {/* XCBDC Transaction Card */}
         <Card
           style={{
-            background: 'linear-gradient(90deg, #E9D5FF, #F9A8D4)',
+            background: 'rgb(6, 6, 6)',
             color: 'white',
             borderRadius: '10px',
             boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
@@ -141,13 +141,13 @@ const LimitsPage = () => {
         >
           <Row justify="space-between" align="middle">
             <Col>
-              <Title level={5} style={{ color: '#000' }}>
+              <Title level={5} style={{ color: '#fff' }}>
                 XCBDC Transaction
               </Title>
             </Col>
             <Col>
               <Tooltip title="Requires Mobile app update, contact admin">
-                <InfoCircleOutlined style={{ fontSize: '18px', color: '#000' }} />
+                <InfoCircleOutlined style={{ fontSize: '18px', color: '#fff' }} />
               </Tooltip>
             </Col>
           </Row>

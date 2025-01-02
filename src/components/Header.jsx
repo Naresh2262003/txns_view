@@ -51,7 +51,7 @@ const HeaderComponent = ({ setSearchData, cardView, setCardView }) => {
         justifyContent: "space-between", 
         alignItems: "center", 
         color: "white",
-        backgroundColor: "#001529",
+        backgroundColor: "rgb(11, 11, 11)",
         padding: "0 50px",
         cursor: "pointer",
         overflow: "hidden",

@@ -46,6 +46,24 @@
     border-radius: 8px;
     animation: popUp 1s;
   }
+
+  .custom-search-button {
+    width: 100%;
+    border-radius: 8px;
+    background: rgba(61, 140, 231, 0);
+    border: 2px solid rgb(61, 140, 231);
+    color: rgb(61, 140, 231);
+    font-weight: 600;
+    transition: all 0.3s ease;
+  
+    &:hover {
+      background: rgb(61, 140, 231);
+      border: none;
+      color: white;
+      font-weight: 600;
+    }
+  }
+  
   
   @keyframes fadeIn {
     from {

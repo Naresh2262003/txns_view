@@ -68,28 +68,15 @@ const Audit = () => {
               }}
             />
             <Button
-              type="primary"
-              size="large"
-              icon={<SearchOutlined />}
-              onClick={handleSearch}
-              // style={{
-              //   width: "100%",
-              //   borderRadius: "8px",
-              //   background: "rgb(61, 140, 231)",
-              //   border: "none",
-              //   fontweight: '600'
-              // }}
-              style={{
-                width: "100%",
-                borderRadius: "8px",
-                background: "rgba(61, 140, 231, 0)",
-                border: "2px solid rgb(61, 140, 231)",
-                color:'rgb(61, 140, 231)',
-                fontweight: '600'
-              }}
-            >
-              SEARCH
-            </Button>
+  type="primary"
+  size="large"
+  icon={<SearchOutlined />}
+  onClick={handleSearch}
+  className="custom-search-button"
+>
+  SEARCH
+</Button>
+
           </div>
 
           {loading && (
