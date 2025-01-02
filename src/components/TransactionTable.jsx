@@ -224,12 +224,12 @@ const TransactionDetails = () => {
       
       onHeaderCell: () => ({
         style: {
-          backgroundColor: '#000', // Header background color
+          backgroundColor: '#000',border: 'none', // Header background color
         },
       }),
       onCell: () => ({
         style: {
-          backgroundColor: '#000', // Column cell background color
+          backgroundColor: '#000', border: 'none', // Column cell background color
         },
       }),
       render: (text) => (
@@ -255,16 +255,16 @@ const TransactionDetails = () => {
       
       onHeaderCell: () => ({
         style: {
-          backgroundColor: '#000', // Header background color
+          backgroundColor: '#000',  border: 'none',// Header background color
         },
       }),
       onCell: () => ({
         style: {
-          backgroundColor: '#000', // Column cell background color
+          backgroundColor: '#000', border: 'none', // Column cell background color
         },
       }),
       render: (status) => (
-        <Tag color={status === 'completed' ? 'green' : 'red'}>
+        <Tag color={status === 'completed' ? '#2E8B57' : '#DC143C'}>
           {status.toUpperCase()}
         </Tag>
       ),
@@ -279,16 +279,16 @@ const TransactionDetails = () => {
       
       onHeaderCell: () => ({
         style: {
-          backgroundColor: '#000', // Header background color
+          backgroundColor: '#000',  border: 'none',// Header background color
         },
       }),
       onCell: () => ({
         style: {
-          backgroundColor: '#000', // Column cell background color
+          backgroundColor: '#000',  border: 'none',// Column cell background color
         },
       }),
       render: (type) => (
-        <Tag color="blue" style={{ borderRadius: '20px', padding: '2px 10px' }}>
+        <Tag color="#1E3A8A" style={{ borderRadius: '20px', padding: '2px 10px' }}>
           {type}
         </Tag>
       ),
@@ -302,12 +302,12 @@ const TransactionDetails = () => {
       align: 'center',
       onHeaderCell: () => ({
         style: {
-          backgroundColor: '#000', // Header background color
+          backgroundColor: '#000',  border: 'none',// Header background color
         },
       }),
       onCell: () => ({
         style: {
-          backgroundColor: '#000', // Column cell background color
+          backgroundColor: '#000',  border: 'none',// Column cell background color
         },
       }),
       render: (text) => (
@@ -333,12 +333,12 @@ const TransactionDetails = () => {
       align: 'center',
       onHeaderCell: () => ({
         style: {
-          backgroundColor: '#000', // Header background color
+          backgroundColor: '#000',  border: 'none',// Header background color
         },
       }),
       onCell: () => ({
         style: {
-          backgroundColor: '#000', // Column cell background color
+          backgroundColor: '#000',  border: 'none', // Column cell background color
         },
       }),
       render: (text) => (
@@ -364,12 +364,12 @@ const TransactionDetails = () => {
       align: 'center',
       onHeaderCell: () => ({
         style: {
-          backgroundColor: '#000', // Header background color
+          backgroundColor: '#000',  border: 'none', // Header background color
         },
       }),
       onCell: () => ({
         style: {
-          backgroundColor: '#000', // Column cell background color
+          backgroundColor: '#000',  border: 'none',// Column cell background color
         },
       }),
       render: (text) => (
@@ -394,12 +394,12 @@ const TransactionDetails = () => {
       align: 'center',
       onHeaderCell: () => ({
         style: {
-          backgroundColor: '#000', // Header background color
+          backgroundColor: '#000',  border: 'none',// Header background color
         },
       }),
       onCell: () => ({
         style: {
-          backgroundColor: '#000', // Column cell background color
+          backgroundColor: '#000',  border: 'none',// Column cell background color
         },
       }),
       render: (text) => (
@@ -425,12 +425,12 @@ const TransactionDetails = () => {
       align: 'center',
       onHeaderCell: () => ({
         style: {
-          backgroundColor: '#000', // Header background color
+          backgroundColor: '#000', border: 'none', // Header background color
         },
       }),
       onCell: () => ({
         style: {
-          backgroundColor: '#000', // Column cell background color
+          backgroundColor: '#000',  border: 'none',// Column cell background color
         },
       }),
       render: (value) => {
@@ -452,12 +452,12 @@ const TransactionDetails = () => {
       align: 'center',
       onHeaderCell: () => ({
         style: {
-          backgroundColor: '#000', // Header background color
+          backgroundColor: '#000',  border: 'none',// Header background color
         },
       }),
       onCell: () => ({
         style: {
-          backgroundColor: '#000', // Column cell background color
+          backgroundColor: '#000',  border: 'none',// Column cell background color
         },
       }),
       render: (address) => (
