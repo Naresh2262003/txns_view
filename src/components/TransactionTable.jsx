@@ -382,6 +382,7 @@ const TransactionDetails = () => {
           style={{ color: '#fff' }}
 
           className="transaction-table"
+          scroll={{ x: 'max-content' }} 
         />
       )}
     </div>

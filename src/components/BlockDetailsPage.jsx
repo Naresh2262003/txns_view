@@ -105,6 +105,7 @@ if (loading) {
             borderRadius: "8px",
             boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
             backgroundColor: 'white',
+         border:"1px solid white"
           }}
           headStyle={{ color: "white" }}
         >
@@ -181,7 +182,7 @@ if (!transaction) {
       <Content style={{ padding: "24px", backgroundColor: "#101820" }}>
         <Card
           title={`Details of UTXO's`}
-          style={{ color: "white", marginBottom: "24px" }}
+          style={{ color: "white", marginBottom: "24px" , border:"5px solid white"}}
           headStyle={{ color: "white", backgroundColor: "#1C2531" }}
         >
           <Row gutter={16}>
@@ -329,7 +330,8 @@ if (!transaction) {
         marginTop: "24px",
         borderRadius: "8px",
         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+         border:"1px solid white"
       }}
       headStyle={{ color: "white", backgroundColor: "#1C2531" }}
       className="custom-card"
@@ -408,7 +410,8 @@ if (!transaction) {
       marginTop: "24px",
       borderRadius: "8px",
       boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-      backgroundColor: 'white'
+      backgroundColor: 'white',
+         border:"1px solid white"
     }}
     headStyle={{ color: "white", backgroundColor: "#1C2531" }}
     className="custom-card"
@@ -487,7 +490,8 @@ if (!transaction) {
         marginTop: "24px",
         borderRadius: "8px",
         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+         border:"1px solid white"
       }}
       headStyle={{ color: "white", backgroundColor: "#1C2531" }}
       className="custom-card"
@@ -565,7 +569,8 @@ if (!transaction) {
         marginTop: "24px",
         borderRadius: "8px",
         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+         border:"1px solid white"
       }}
       headStyle={{ color: "white", backgroundColor: "#1C2531" }}
       className="custom-card"
@@ -629,7 +634,8 @@ if (!transaction) {
         marginTop: "24px",
         borderRadius: "8px",
         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+         border:"1px solid white"
       }}
       headStyle={{ color: "white", backgroundColor: "#1C2531" }}
       className="custom-card"
