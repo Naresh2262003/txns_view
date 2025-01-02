@@ -21,8 +21,15 @@ const LimitsPage = () => {
           'https://xtsp-go.niceriver-b5ad439b.centralindia.azurecontainerapps.io/v1/api/admin/configs/' // Replace with your API endpoint
         );
 
-        setLoadLimit(response.data[1].key==="load_amount_max_limit" ? response.data[1].value : response.data[0].value );
-        setTransactionLimit(response.data[1].key==="load_amount_max_limit" ? response.data[0].value : response.data[1].value );
+        console.log("limit", response)
+        // Set the load limit based on filtered results
+        const loadLimit = response.data.find(item => item.key === "load_amount_max_limit");
+        setLoadLimit(loadLimit.value.replace(/\..*$/, ""));
+
+        console.log("limit   ji", loadLimit.value.replace(/\..*$/, ""))
+
+        const transactionLimit = response.data.find(item => item.key === "per_transfer_max_limit");
+        setTransactionLimit(transactionLimit.value.replace(/\..*$/, ""));
       } catch (error) {
         console.error('Error fetching limits:', error);
         message.error('Failed to fetch limits. Please try again later.');

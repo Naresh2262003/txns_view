@@ -30,12 +30,13 @@ const TransactionDetails = () => {
   // Function to fetch transaction data
   const fetchTransactionData = () => {
     // setLoading(true);
+    if(table!='utxos_x'){
     axios
       .get(' https://xtsp-go.niceriver-b5ad439b.centralindia.azurecontainerapps.io/v1/api/txs/?proof=false') 
       .then((response) => {
         console.log(response.data);
         
-        const dataToset = table!='utxos_x' ? response.data.filter((tx) => tx.tx_type == table): response.data;
+        const dataToset = response.data.filter((tx) => tx.tx_type == table);
         console.log("load dat  u a", dataToset);
         // setTransactionData(response.data);
 
@@ -46,10 +47,10 @@ const TransactionDetails = () => {
           return timeB - timeA; // Descending order
         });
 
-        if (JSON.stringify(prevTransactionDataRef.current) !== JSON.stringify(dataToset)) {
+        // if (JSON.stringify(prevTransactionDataRef.current) !== JSON.stringify(dataToset)) {
           setTransactionData(dataToset);
-          message.success('New UTXO found!');
-        }
+          // message.success('New UTXO found!');
+        // }
 
         prevTransactionDataRef.current = dataToset;
 
@@ -67,6 +68,46 @@ const TransactionDetails = () => {
         setLoading(false);
         setButtonLoading(false);
       });
+    }else{
+      axios
+      .get('https://xtsp-go.niceriver-b5ad439b.centralindia.azurecontainerapps.io/v1/api/xtsp/xrupee/balance/') 
+      .then((response) => {
+        console.log(response.data);
+        
+        // const dataToset = response.data.filter((tx) => tx.tx_type == table);
+        // console.log("load dat  u a", dataToset);
+        setTransactionData(response.data.utxos);
+        console.log(transactionData)
+
+        // // Sort data by tx.time in descending order (newest first)
+        // dataToset.sort((a, b) => {
+        //   const timeA = new Date(a.time);
+        //   const timeB = new Date(b.time);
+        //   return timeB - timeA; // Descending order
+        // });
+
+        // // if (JSON.stringify(prevTransactionDataRef.current) !== JSON.stringify(dataToset)) {
+        //   setTransactionData(dataToset);
+        //   // message.success('New UTXO found!');
+        // // }
+
+        // prevTransactionDataRef.current = dataToset;
+
+        localStorage.setItem("table",table);
+
+        // // setTransactionData(dataToset);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error('Error fetching transaction data:', error);
+        message.error('Failed to load transaction data.');
+        setLoading(false);
+      })
+      .finally(() => {
+        setLoading(false);
+        setButtonLoading(false);
+      });
+    }
   };
 
   // Fetch transaction data initially and every 10 seconds
@@ -110,19 +151,30 @@ const TransactionDetails = () => {
         txType: item?.tx_type || 'N/A',
         outputEphemeralKey: item?.tx?.tx?.output_utxo?.ephemeral_key || item?.tx?.tx?.output_utxos?.[0]?.ephemeral_key || item?.tx?.tx?.tx?.output_utxos?.[0]?.ephemeral_key  || 'N/A',
         outputGenTxId:  item?.tx?.tx?.output_utxo?.gen_tx_id || item?.tx?.tx?.output_utxos?.[0]?.gen_tx_id ||  item?.tx?.tx?.tx?.output_utxos?.[0]?.gen_tx_id || 'N/A',
-        inputEphemeralKey: inputUtxos[0]?.ephemeral_key || item?.tx?.tx?.tx?.input_utxos?.[0]?.ephemeral_key || 'N/A',
-        inputGenTxId: inputUtxos[0]?.gen_tx_id || item?.tx?.tx?.tx?.input_utxos?.[0]?.gen_tx_id || 'N/A',
-        outputAmount: item?.tx?.tx?.amount || 'N/A',
+        inputEphemeralKey: inputUtxos[0]?.ephemeral_key || item?.tx?.tx?.tx?.input_utxos?.[0]?.ephemeral_key || item?.ephemeral_key || 'N/A',
+        inputGenTxId: inputUtxos[0]?.gen_tx_id || item?.tx?.tx?.tx?.input_utxos?.[0]?.gen_tx_id || item?.gen_tx_id || 'N/A',
+        outputAmount: item?.tx?.tx?.amount || item?.amount || 'N/A',
+        ephemeral_key: item?.ephemeral_key || 'N/A',
+        // em
         // address: { x: item?.tx?.tx?.output_utxo?.address.x, y:item?.tx?.tx?.output_utxo?.address.y} ||  { x: item?.tx?.tx?.input_utxos[0]?.address?.x, y:item?.tx?.tx?.input_utxos[0]?.address.y} || { x: 'N/A', y: 'N/A' },
 
 
-      address: item?.tx?.tx?.output_utxo?.address?.x && item?.tx?.tx?.output_utxo?.address?.y
-  ? { x: item?.tx?.tx?.output_utxo?.address.x, y: item?.tx?.tx?.output_utxo?.address.y }
-  : (item?.tx?.tx?.input_utxos?.[0]?.address?.x && item?.tx?.tx?.input_utxos?.[0]?.address?.y
-      ? { x: item?.tx?.tx?.input_utxos[0]?.address.x, y: item?.tx?.tx?.input_utxos[0]?.address.y }
-      : (item?.tx?.tx?.tx?.input_utxos?.[0]?.address 
-          ? parseAddress(item?.tx?.tx?.tx?.input_utxos?.[0]?.address)
-          : parseAddress(item?.tx?.tx?.input_utxos?.[0]?.address)))
+  //     address: item?.tx?.tx?.output_utxo?.address?.x && item?.tx?.tx?.output_utxo?.address?.y
+  // ? { x: item?.tx?.tx?.output_utxo?.address.x, y: item?.tx?.tx?.output_utxo?.address.y }
+  // : (item?.tx?.tx?.input_utxos?.[0]?.address?.x && item?.tx?.tx?.input_utxos?.[0]?.address?.y
+  //     ? { x: item?.tx?.tx?.input_utxos[0]?.address.x, y: item?.tx?.tx?.input_utxos[0]?.address.y }
+  //     : (item?.tx?.tx?.tx?.input_utxos?.[0]?.address 
+  //         ? parseAddress(item?.tx?.tx?.tx?.input_utxos?.[0]?.address)
+  //         : parseAddress(item?.tx?.tx?.input_utxos?.[0]?.address)))
+   address : item?.tx?.tx?.output_utxo?.address?.x && item?.tx?.tx?.output_utxo?.address?.y
+    ? { x: item.tx.tx.output_utxo.address.x, y: item.tx.tx.output_utxo.address.y }
+    : item?.tx?.tx?.input_utxos?.[0]?.address?.x && item?.tx?.tx?.input_utxos?.[0]?.address?.y
+    ? { x: item.tx.tx.input_utxos[0].address.x, y: item.tx.tx.input_utxos[0].address.y }
+    : item?.tx?.tx?.tx?.input_utxos?.[0]?.address
+    ? parseAddress(item.tx.tx.tx.input_utxos[0].address)
+    : item?.tx?.tx?.input_utxos?.[0]?.address
+    ? parseAddress(item.tx.tx.input_utxos[0].address)
+    : parseAddress(item?.address)
   
       };
     });
@@ -249,7 +301,7 @@ const TransactionDetails = () => {
     },
     {
       title: (
-        <div style={{ ...headerStyle }}>Input Ephemeral Key</div>
+        <div style={{ ...headerStyle }}>{table!="utxos_x" ? "Input Ephemeral Key": "Ephemeral Key"}</div>
       ),
       dataIndex: 'inputEphemeralKey',
       key: 'inputEphemeralKey',
@@ -269,7 +321,7 @@ const TransactionDetails = () => {
     },
     {
       title: (
-        <div style={{ ...headerStyle }}>Input Gen Tx ID</div>
+        <div style={{ ...headerStyle }}>{table!="utxos_x" ? "Input Gen Tx id": " Gen Tx id"}</div>
       ),
       dataIndex: 'inputGenTxId',
       key: 'inputGenTxId',
@@ -288,6 +340,21 @@ const TransactionDetails = () => {
         </div>
       ),
     },
+    // {
+    //   title: (
+    //     <div style={{ ...headerStyle }}>Amount</div>
+    //   ),
+    //   dataIndex: 'outputAmount',
+    //   key: 'outputAmount',
+    //   align: 'center',
+    //   render: (value) => {
+    //     return (
+    //       <div style={{ ...columnStyle, color:"#000" }}>
+    //         <span>{value}</span>
+    //       </div>
+    //     );
+    //   },
+    // }, 
     {
       title: (
         <div style={{ ...headerStyle }}>Amount</div>
@@ -296,9 +363,10 @@ const TransactionDetails = () => {
       key: 'outputAmount',
       align: 'center',
       render: (value) => {
+        const abbreviatedValue = abbreviateString(value, 30); // Abbreviate amount string to 10 characters
         return (
-          <div style={{ ...columnStyle, color:"#000" }}>
-            <span>₹ {value}</span>
+          <div style={{ ...columnStyle, color: "#000" }}>
+            <span>{abbreviatedValue}</span>
           </div>
         );
       },

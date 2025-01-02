@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Card, Typography, Descriptions, Spin, message, Layout, Row, Col, Alert , Skeleton} from "antd";
+import { Card, Typography, Descriptions, Spin, message, Layout, Row, Col, Alert , Skeleton, Modal} from "antd";
 import './DetailsPage.css'
 import ReadMore from "./Readmore.jsx";
 import { useParams } from "react-router-dom"; 
@@ -81,9 +81,15 @@ const proofButtonHandler = async () => {
       `https://xtsp-go.niceriver-b5ad439b.centralindia.azurecontainerapps.io/v1/api/xtsp/txs/${transactionId}/verify/`
     );
 
-    message.success(response.data.message)
+    Modal.success({
+      title: "Proof Verified",
+      content: response.data.message,
+    });
   } catch (error) {
-    message.error(error.message)
+    Modal.error({
+      title: "Verification Failed",
+      content: error.message || "An error occurred during proof verification.",
+    });
     console.error('Error fetching proof:', error);
   }
 };

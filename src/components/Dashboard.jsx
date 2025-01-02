@@ -10,23 +10,51 @@ const { Header, Content, Sider } = Layout;
 const { Title, Text } = Typography;
 
 const Dashboard = () => {
+  // const [data, setData] = useState(null); // State to hold API data
+  // const api = "https://xtsp-go.niceriver-b5ad439b.centralindia.azurecontainerapps.io/v1/api/audit-log/";
+
+  // useEffect(() => {
+  //   // Fetch data from the API using axios
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get(api);
+  //       console.log(response);
+  //       setData(response.data); // Store the fetched data in state
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
+
   const [data, setData] = useState(null); // State to hold API data
+  const [loading, setLoading] = useState(true); // Loading state
   const api = "https://xtsp-go.niceriver-b5ad439b.centralindia.azurecontainerapps.io/v1/api/audit-log/";
 
   useEffect(() => {
-    // Fetch data from the API using axios
+    // Function to fetch data from the API
     const fetchData = async () => {
       try {
         const response = await axios.get(api);
-        console.log(response);
+        console.log(response.data);
         setData(response.data); // Store the fetched data in state
+        setLoading(false); // Set loading to false after data is fetched
       } catch (error) {
         console.error("Error fetching data:", error);
+        setLoading(false); // Ensure loading is false in case of error
       }
     };
 
+    // Fetch data initially
     fetchData();
-  }, []);
+
+    // Set interval to fetch data every 10 seconds
+    const intervalId = setInterval(fetchData, 10000);
+
+    // Cleanup interval on component unmount
+    return () => clearInterval(intervalId);
+  }, [api]); // Depend on the API URL
 
   
   if(!data){
@@ -135,10 +163,10 @@ const Dashboard = () => {
         <Content style={{ padding: "24px" }}>
           {/* Row : Limits and Metrics */}
           <Row gutter={[16, 16]}>
-            <Col span={8}>
+            <Col span={12}>
               <Card
                 style={{
-                  background: "linear-gradient(135deg, #7D4AEA, #C084FC)",
+                  background: "#2C2C2C",
                   color: "#FFFFFF",
                   textAlign: "center",
                   paddingBlock: "16px",
@@ -146,99 +174,139 @@ const Dashboard = () => {
                   borderRadius: "12px",
                 }}
               >
-                <Text style={{ fontSize: "35px", color: "#FFFFFF", marginBottom: "12px" }}>₹</Text>
-                {/* <Text style={{ fontSize: "16px", fontWeight: "600" }}> XCBDC Load Limit</Text>
-                <Title level={3} style={{ color: "#FFFFFF", margin: "16px 0" }}>₹{data.xcbdc_load_limit}</Title>
-                <Text style={{ color: "#FFFFFF", fontSize: "14px", opacity: 0.8 }}>Daily cap for XCBDC loading</Text> */}
-                <Text style={{ fontSize: "16px", fontWeight: "600" }}> Total Pool Balance</Text>
-                <Title level={3} style={{ color: "#FFFFFF", margin: "16px 0" }}>₹{data.pool_balance}</Title>
-                <Text style={{ color: "#FFFFFF", fontSize: "14px", opacity: 0.8 }}>Available balance for transactions</Text>
+                <Statistic
+                  title={<Text style={{ fontSize: "16px",color: "#fff" }}>XCBDC Pool Balance</Text>}
+                  value={new Intl.NumberFormat('en-IN').format(data.pool_balance)}
+                  prefix={<Text style={{ color: "#fff", fontSize: "24px" }}>₹</Text>}
+                  valueStyle={{ color: "#FFFFFF" }}
+                />
               </Card>
             </Col>
-            <Col span={8}>
+            <Col span={12}>
               <Card
                 style={{
-                  background: "linear-gradient(135deg, #4CAF50, #8BC34A)",
+                  background: "#2C2C2C",
                   color: "#FFFFFF",
                   textAlign: "center",
                   padding: "20px",
                   borderRadius: "12px",
                 }}
               >
-                <BarChartOutlined style={{ fontSize: "36px", color: "#FFFFFF", marginBottom: "12px" }} />
-                {/* <Text style={{ fontSize: "16px", fontWeight: "600" }}> Transaction Amount Limit</Text>
-                <Title level={3} style={{ color: "#FFFFFF", margin: "16px 0" }}>₹{data.xcbdc_txn_amount_limit}</Title>
-                <Text style={{ color: "#FFFFFF", fontSize: "14px", opacity: 0.8 }}>Maximum amount per transaction</Text> */}
-                <Text style={{ fontSize: "16px", fontWeight: "600" }}> CBDC Circulation</Text>
-                <Title level={3} style={{ color: "#FFFFFF", margin: "16px 0" }}>₹{data.total_cbdc}</Title>
-                <Text style={{ color: "#FFFFFF", fontSize: "14px", opacity: 0.8 }}>Total circulating CBDC</Text>
-              </Card>
-            </Col>
-            <Col span={8}>
-              <Card
-                style={{
-                  background: "linear-gradient(135deg, #F44336, #FF7961)",
-                  color: "#FFFFFF",
-                  textAlign: "center",
-                  padding: "20px",
-                  borderRadius: "12px",
-                }}
-              >
-                <TransactionOutlined style={{ fontSize: "36px", color: "#FFFFFF", marginBottom: "12px" }} />
-                <Text style={{ fontSize: "16px", fontWeight: "600" }}> Total Transactions</Text>
-                <Title level={3} style={{ color: "#FFFFFF", margin: "16px 0" }}>{data.total_xcbdc_txns}</Title>
-                <Text style={{ color: "#FFFFFF", fontSize: "14px", opacity: 0.8 }}>Total XCBDC transactions</Text>
+                <Statistic
+                  title={<Text style={{fontSize: "16px", color: "#fff" }}>CBDC in Circulation</Text>}
+                  value={new Intl.NumberFormat('en-IN').format(data.total_cbdc)}
+                  prefix={<Text style={{ color: "#fff", fontSize: "24px" }}>₹</Text>}
+                  valueStyle={{ color: "#FFFFFF" }}
+                />
               </Card>
             </Col>
           </Row>
           {/* Row : Statistics and Overview */}
           <Row gutter={[16, 16]} align="middle" style={{ marginTop: "24px" }}>
-            <Col span={6}>
-              <Card style={{ background: "#2C2C2C", color: "#FFFFFF", textAlign: "center" }}>
+            
+            
+          {/* <Col span={8}>
+              <Card
+                style={{
+                  background: "#2C2C2C",
+                  color: "#FFFFFF",
+                  textAlign: "center",
+                  padding: "20px",
+                  borderRadius: "12px",
+                }}
+              >
                 <Statistic
-                  title="XCBDC Load Limit"
-                  value={data.xcbdc_load_limit}
-                  prefix={<Text style={{ color: "#7D4AEA", fontSize: "24px" }}>₹</Text>}
+                  title={<Text style={{fontSize: "16px", color: "#fff" }}>Total XCBDC transactions</Text>}
+                  value={data.total_xcbdc_txns}
                   valueStyle={{ color: "#FFFFFF" }}
                 />
+                
               </Card>
-            </Col>
-            <Col span={6}>
-              <Card style={{ background: "#2C2C2C", color: "#FFFFFF", textAlign: "center" }}>
-                <Statistic
-                  title="Transaction Amount Limit"
-                  value={data.xcbdc_txn_amount_limit}
-                  valueStyle={{ color: "#FFFFFF" }}
-                  prefix={<Text style={{ color: "#7D4AEA", fontSize: "24px" }}>₹</Text>}
-                />
-              </Card>
-            </Col>
-            <Col span={6}>
+            </Col> */}
+            
+            <Col span={12}>
               <Card style={{ background: "#2C2C2C", color: "#FFFFFF", textAlign: "center" }}>
                 <Statistic
                   title="CBDC Users"
                   value={data.total_cbdc_users}
-                  prefix={<UserOutlined style={{ color: "#4CAF50" }} />}
                   valueStyle={{ color: "#FFFFFF" }}
                 />
               </Card>
             </Col>
-            <Col span={6}>
+            
+            <Col span={12}>
               <Card style={{ background: "#2C2C2C", color: "#FFFFFF", textAlign: "center" }}>
                 <Statistic
                   title="Stealth Addresses"
                   value={data.total_stealth_addresses}
                   valueStyle={{ color: "#FFFFFF" }}
-                  prefix={<LockOutlined style={{ color: "#F0A202" }} />}
                 />
               </Card>
             </Col>
+
+            
           </Row>
 
-          
+          <Row gutter={[16, 16]} align="middle" style={{ marginTop: "24px" }}>
+          <Col span={12}>
+              <Card style={{ background: "#2C2C2C", color: "#FFFFFF", textAlign: "center" }}>
+                <Statistic
+                  title="XCBDC Load Limit"
+                  value={new Intl.NumberFormat('en-IN').format(data.xcbdc_load_limit)}
+                  prefix={<Text style={{ color: "#7D4AEA", fontSize: "24px" }}>₹</Text>}
+                  valueStyle={{ color: "#FFFFFF" }}
+                />
+              </Card>
+            </Col>
+            <Col span={12}>
+              <Card style={{ background: "#2C2C2C", color: "#FFFFFF", textAlign: "center" }}>
+                <Statistic
+                  title="Transaction Amount Limit"
+                  value={new Intl.NumberFormat('en-IN').format(data.xcbdc_txn_amount_limit)}
+                  valueStyle={{ color: "#FFFFFF" }}
+                  prefix={<Text style={{ color: "#7D4AEA", fontSize: "24px" }}>₹</Text>}
+                />
+              </Card>
+            </Col>
+            </Row>
+          {/*  */}
+          <Row gutter={[16, 16]} align="middle" style={{ marginTop: "24px" }}>
+            <Col span={8}>
+              <Card style={{ background: "#2C2C2C", color: "#FFFFFF", textAlign: "center" }}>
+                <Statistic
+                  title="XCBDC Loaded"
+                  value={new Intl.NumberFormat('en-IN').format(data.total_loaded)}
+                  prefix={<Text style={{ color: "#7D4AEA", fontSize: "24px" }}>₹</Text>}
+                  valueStyle={{ color: "#FFFFFF" }}
+                />
+              </Card>
+            </Col>
+            <Col span={8}>
+              <Card style={{ background: "#2C2C2C", color: "#FFFFFF", textAlign: "center" }}>
+                <Statistic
+                  title="XCBDC Unloaded"
+                  value={new Intl.NumberFormat('en-IN').format(data.total_unloaded)}
+                  prefix={<Text style={{ color: "#7D4AEA", fontSize: "24px" }}>₹</Text>}
+                  valueStyle={{ color: "#FFFFFF" }}
+                />
+              </Card>
+            </Col>
+
+            
+            <Col span={8}>
+              <Card style={{ background: "#2C2C2C", color: "#FFFFFF", textAlign: "center" }}>
+            <Statistic
+                  title="Total XCBDC transactions"
+                  value={data.total_xcbdc_txns}
+                  valueStyle={{ color: "#FFFFFF" }}
+                />
+                </Card>
+                </Col>
+            
+          </Row>
 
           {/* Row : Visual Representation */}
-          <Row gutter={[16, 16]} style={{ marginTop: "24px" }}>
+          {/* <Row gutter={[16, 16]} style={{ marginTop: "24px" }}>
             <Col span={12}>
               <Card style={{ background: "#2C2C2C", color: "#FFFFFF" }}>
                 <Text style={{ color: "#B5B5B5", fontSize: "14px" }}>Transaction Overview</Text>
@@ -275,11 +343,11 @@ const Dashboard = () => {
                   }}
                 />
                 <Text style={{ color: "#FFFFFF" }}>
-                  ₹{data.total_xcbdc} / ₹{data.xcbdc_load_per_day_limit}
+                  ₹{data.total_xcbdc} / ₹{data.xcbdc_txn_amount_limit}
                 </Text>
               </Card>
             </Col>
-          </Row>
+          </Row> */}
 
         </Content>
       </Layout>
