@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { Table, Tag, Tooltip, message, Spin, Button, Skeleton } from 'antd';
-// import './Table.css'
 
 // Utility function to abbreviate long strings
 const abbreviateString = (str, maxLength = 20) => {
@@ -75,11 +74,11 @@ const TransactionDetails = () => {
     console.log("I am heer")
     fetchTransactionData(); 
 
-    // const intervalId = setInterval(() => {
-    //   fetchTransactionData();
-    // }, 10000);
+    const intervalId = setInterval(() => {
+      fetchTransactionData();
+    }, 10000);
 
-    // return () => clearInterval(intervalId);
+    return () => clearInterval(intervalId);
   }, [table]);
 
   const handleButtonClick = (type) => {
