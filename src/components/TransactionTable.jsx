@@ -298,7 +298,7 @@ const TransactionDetails = () => {
       render: (value) => {
         return (
           <div style={{ ...columnStyle, color:"#000" }}>
-            <span>{value}</span>
+            <span>₹ {value}</span>
           </div>
         );
       },
