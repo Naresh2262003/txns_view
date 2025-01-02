@@ -4,7 +4,7 @@ import TransactionTable from './components/TransactionTable.jsx';
 import HeaderComponent from './components/Header.jsx';
 import SiderContent from "./components/SiderContent.jsx";
 
-import { BrowserRouter as Router, Routes, Route ,Navigate } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route ,Navigate } from 'react-router-dom';
 import { Layout, Button } from "antd";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 
