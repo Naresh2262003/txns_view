@@ -224,7 +224,7 @@ const Dashboard = () => {
             <Col span={12}>
               <Card style={{ background: "#2C2C2C", color: "#FFFFFF", textAlign: "center", borderRadius: "12px"}}>
                 <Statistic
-                  title={<Text style={{fontSize: "20px", color: "#fff", fontWeight: "normal" }}>CBDC Users</Text>}
+                  title={<Text style={{fontSize: "20px", color: "#fff", fontWeight: "normal" }}>XCBDC Users</Text>}
                   value={data.total_cbdc_users}
                   valueStyle={{ color: "#FFFFFF" }}
                 />
@@ -258,7 +258,7 @@ const Dashboard = () => {
             <Col span={12}>
               <Card style={{ background: "#2C2C2C", color: "#FFFFFF", textAlign: "center", borderRadius: "12px"}}>
                 <Statistic
-                  title={<Text style={{fontSize: "20px", color: "#fff", fontWeight: "normal" }}>Transaction Amount Limit</Text>}
+                  title={<Text style={{fontSize: "20px", color: "#fff", fontWeight: "normal" }}> XCBDC Transaction Amount Limit</Text>}
                   value={new Intl.NumberFormat('en-IN').format(data.xcbdc_txn_amount_limit)}
                   valueStyle={{ color: "#FFFFFF" }}
                   prefix={<Text style={{ color: "#7D4AEA", fontSize: "24px" }}>₹</Text>}
