@@ -141,7 +141,7 @@ const Dashboard = () => {
 
 
   return (
-    <Layout style={{ height: "100vh", background: "#1A1A1A" }}>
+    <Layout style={{ height: "100vh", background: "rgb(20, 20, 20)" }}>
 
       {/* Main Content */}
       <Layout>
@@ -155,7 +155,7 @@ const Dashboard = () => {
             fontFamily: "Roboto, serif",
           }}
         >
-          <Text style={{ color: "#FFFFFF", fontSize: "34px", fontWeight: "bold" }}>
+          <Text style={{ color: "#FFFFFF", fontSize: "32px" }}>
             Dashboard Overview
           </Text>
         </Header>
@@ -169,15 +169,13 @@ const Dashboard = () => {
                   background: "#2C2C2C",
                   color: "#FFFFFF",
                   textAlign: "center",
-                  paddingBlock: "16px",
-                  paddingInline: "20px",
                   borderRadius: "12px",
                 }}
               >
                 <Statistic
-                  title={<Text style={{ fontSize: "16px",color: "#fff" }}>XCBDC Pool Balance</Text>}
+                  title={<Text style={{ fontSize: "20px",color: "#fff", fontWeight: "normal" }}>XCBDC Pool Balance</Text>}
                   value={new Intl.NumberFormat('en-IN').format(data.pool_balance)}
-                  prefix={<Text style={{ color: "#fff", fontSize: "24px" }}>₹</Text>}
+                  prefix={<Text style={{ color: "rgb(125, 74, 234)", fontSize: "24px" }}>₹</Text>}
                   valueStyle={{ color: "#FFFFFF" }}
                 />
               </Card>
@@ -188,14 +186,13 @@ const Dashboard = () => {
                   background: "#2C2C2C",
                   color: "#FFFFFF",
                   textAlign: "center",
-                  padding: "20px",
                   borderRadius: "12px",
                 }}
               >
                 <Statistic
-                  title={<Text style={{fontSize: "16px", color: "#fff" }}>CBDC in Circulation</Text>}
+                  title={<Text style={{fontSize: "20px", color: "#fff", fontWeight: "normal" }}>CBDC in Circulation</Text>}
                   value={new Intl.NumberFormat('en-IN').format(data.total_cbdc)}
-                  prefix={<Text style={{ color: "#fff", fontSize: "24px" }}>₹</Text>}
+                  prefix={<Text style={{ color: "rgb(125, 74, 234)", fontSize: "24px" }}>₹</Text>}
                   valueStyle={{ color: "#FFFFFF" }}
                 />
               </Card>
@@ -225,9 +222,9 @@ const Dashboard = () => {
             </Col> */}
             
             <Col span={12}>
-              <Card style={{ background: "#2C2C2C", color: "#FFFFFF", textAlign: "center" }}>
+              <Card style={{ background: "#2C2C2C", color: "#FFFFFF", textAlign: "center", borderRadius: "12px"}}>
                 <Statistic
-                  title="CBDC Users"
+                  title={<Text style={{fontSize: "20px", color: "#fff", fontWeight: "normal" }}>CBDC Users</Text>}
                   value={data.total_cbdc_users}
                   valueStyle={{ color: "#FFFFFF" }}
                 />
@@ -235,9 +232,9 @@ const Dashboard = () => {
             </Col>
             
             <Col span={12}>
-              <Card style={{ background: "#2C2C2C", color: "#FFFFFF", textAlign: "center" }}>
+              <Card style={{ background: "#2C2C2C", color: "#FFFFFF", textAlign: "center", borderRadius: "12px"}}>
                 <Statistic
-                  title="Stealth Addresses"
+                  title={<Text style={{fontSize: "20px", color: "#fff", fontWeight: "normal" }}>Stealth Addresses</Text>}
                   value={data.total_stealth_addresses}
                   valueStyle={{ color: "#FFFFFF" }}
                 />
@@ -249,9 +246,9 @@ const Dashboard = () => {
 
           <Row gutter={[16, 16]} align="middle" style={{ marginTop: "24px" }}>
           <Col span={12}>
-              <Card style={{ background: "#2C2C2C", color: "#FFFFFF", textAlign: "center" }}>
+              <Card style={{ background: "#2C2C2C", color: "#FFFFFF", textAlign: "center", borderRadius: "12px"}}>
                 <Statistic
-                  title="XCBDC Load Limit"
+                  title={<Text style={{fontSize: "20px", color: "#fff", fontWeight: "normal" }}>XCBDC Load Limit</Text>}
                   value={new Intl.NumberFormat('en-IN').format(data.xcbdc_load_limit)}
                   prefix={<Text style={{ color: "#7D4AEA", fontSize: "24px" }}>₹</Text>}
                   valueStyle={{ color: "#FFFFFF" }}
@@ -259,9 +256,9 @@ const Dashboard = () => {
               </Card>
             </Col>
             <Col span={12}>
-              <Card style={{ background: "#2C2C2C", color: "#FFFFFF", textAlign: "center" }}>
+              <Card style={{ background: "#2C2C2C", color: "#FFFFFF", textAlign: "center", borderRadius: "12px"}}>
                 <Statistic
-                  title="Transaction Amount Limit"
+                  title={<Text style={{fontSize: "20px", color: "#fff", fontWeight: "normal" }}>Transaction Amount Limit</Text>}
                   value={new Intl.NumberFormat('en-IN').format(data.xcbdc_txn_amount_limit)}
                   valueStyle={{ color: "#FFFFFF" }}
                   prefix={<Text style={{ color: "#7D4AEA", fontSize: "24px" }}>₹</Text>}
@@ -272,9 +269,9 @@ const Dashboard = () => {
           {/*  */}
           <Row gutter={[16, 16]} align="middle" style={{ marginTop: "24px" }}>
             <Col span={8}>
-              <Card style={{ background: "#2C2C2C", color: "#FFFFFF", textAlign: "center" }}>
+              <Card style={{ background: "#2C2C2C", color: "#FFFFFF", textAlign: "center",borderRadius: "12px"}}>
                 <Statistic
-                  title="XCBDC Loaded"
+                  title={<Text style={{fontSize: "20px", color: "#fff", fontWeight: "normal" }}>XCBDC Loaded</Text>}
                   value={new Intl.NumberFormat('en-IN').format(data.total_loaded)}
                   prefix={<Text style={{ color: "#7D4AEA", fontSize: "24px" }}>₹</Text>}
                   valueStyle={{ color: "#FFFFFF" }}
@@ -282,9 +279,9 @@ const Dashboard = () => {
               </Card>
             </Col>
             <Col span={8}>
-              <Card style={{ background: "#2C2C2C", color: "#FFFFFF", textAlign: "center" }}>
+              <Card style={{ background: "#2C2C2C", color: "#FFFFFF", textAlign: "center", borderRadius: "12px" }}>
                 <Statistic
-                  title="XCBDC Unloaded"
+                  title={<Text style={{fontSize: "20px", color: "#fff", fontWeight: "normal" }}>XCBDC Unloaded</Text>}
                   value={new Intl.NumberFormat('en-IN').format(data.total_unloaded)}
                   prefix={<Text style={{ color: "#7D4AEA", fontSize: "24px" }}>₹</Text>}
                   valueStyle={{ color: "#FFFFFF" }}
@@ -294,9 +291,9 @@ const Dashboard = () => {
 
             
             <Col span={8}>
-              <Card style={{ background: "#2C2C2C", color: "#FFFFFF", textAlign: "center" }}>
+              <Card style={{ background: "#2C2C2C", color: "#FFFFFF", textAlign: "center", borderRadius: "12px" }}>
             <Statistic
-                  title="Total XCBDC transactions"
+                  title={<Text style={{fontSize: "20px", color: "#fff", fontWeight: "normal" }}>Total XCBDC transactions</Text>}
                   value={data.total_xcbdc_txns}
                   valueStyle={{ color: "#FFFFFF" }}
                 />

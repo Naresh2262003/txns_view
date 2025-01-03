@@ -190,14 +190,14 @@ const TransactionDetails = () => {
 
   // Columns for the table
   const headerStyle = {
-    background: 'linear-gradient(90deg, #5c5c78, #3c3c50)',
+    background: 'none',
     // backgroundColor: 'grey',
-    color: '#fff',
+    color: '#6a6c6e',
     fontWeight:'500',
     textAlign: 'center',
     padding: '12px',
     borderRadius: '8px',
-    boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.3)',
+    // boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.3)',
   };
 
   const columnStyle = {
@@ -264,7 +264,16 @@ const TransactionDetails = () => {
         },
       }),
       render: (status) => (
-        <Tag color={status === 'completed' ? '#2E8B57' : '#DC143C'}>
+        <Tag
+          style={{
+            color: status === 'completed' ? '#2E8B57' : '#DC143C',
+            backgroundColor: status === 'completed' ? '#2E8B571F' : '#DC143C1F', // 1F is 15% opacity in hex
+            border: `1px solid ${status === 'completed' ? '#2E8B57' : '#DC143C'}`,
+            padding: '4px 8px', // Optional padding for better appearance
+            borderRadius: '4px', // Optional for rounded corners
+            display: 'inline-block', // Ensures it behaves like a tag
+          }}
+        >
           {status.toUpperCase()}
         </Tag>
       ),
@@ -288,7 +297,17 @@ const TransactionDetails = () => {
         },
       }),
       render: (type) => (
-        <Tag color="#1E3A8A" style={{ borderRadius: '20px', padding: '2px 10px' }}>
+        <Tag
+          color="#1E3A8A"
+          style={{
+            color: '#1E3A8A',
+            backgroundColor: '#1E3A8A1F', // 1F is 15% opacity in hex
+            border: '1px solid #1E3A8A',
+            borderRadius: '20px',
+            padding: '2px 10px',
+            display: 'inline-block', // Ensures it behaves like a tag
+          }}
+        >
           {type}
         </Tag>
       ),
@@ -436,7 +455,7 @@ const TransactionDetails = () => {
       render: (value) => {
         const abbreviatedValue = abbreviateString(value, 30); // Abbreviate amount string to 10 characters
         return (
-          <div style={{ ...columnStyle, color:"#C9A0DC", fontWeight: 'bold'}}>
+          <div style={{ ...columnStyle, color:"#c23fff", fontWeight: 'bold'}}>
             <span>{abbreviatedValue}</span>
           </div>
         );
@@ -468,7 +487,7 @@ const TransactionDetails = () => {
               style={{ cursor: 'pointer', ...columnStyle }}
               onClick={() => handleCopy(address.x)}
             >
-              <strong style={{color:"#C9A0DC"}}>X:</strong> {abbreviateString(address.x, 25)}
+              <strong style={{color:"#c23fff"}}>X:</strong> {abbreviateString(address.x, 25)}
             </div>
           </Tooltip>
           <Tooltip title="Click to copy">
@@ -476,7 +495,7 @@ const TransactionDetails = () => {
               style={{ cursor: 'pointer', ...columnStyle}}
               onClick={() => handleCopy(address.y)}
             >
-              <strong style={{color:"#C9A0DC"}}>Y:</strong> {abbreviateString(address.y, 25)}
+              <strong style={{color:"#c23fff"}}>Y:</strong> {abbreviateString(address.y, 25)}
             </div>
           </Tooltip>
         </div>

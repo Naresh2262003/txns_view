@@ -184,12 +184,12 @@ if (!transaction) {
   const blockData = transaction;
 
   return (
-    <Layout style={{ minHeight: "100vh" , backgroundColor: "#101820"}}>
-      <Content style={{ padding: "24px", backgroundColor: "#101820" }}>
+    <Layout style={{ minHeight: "100vh" , backgroundColor: "#141414"}}>
+      <Content style={{ padding: "24px", backgroundColor: "#141414" }}>
         <Card
           title={`Details of UTXO's`}
-          style={{ color: "white", marginBottom: "24px" , border:"5px solid white"}}
-          headStyle={{ color: "white", backgroundColor: "#1C2531" }}
+          style={{ color: "#3f3f3f", marginBottom: "24px" , border:"1.5px solid #3f3f3f"}}
+          headStyle={{ color: "white", backgroundColor: "rgb(21, 21, 21)" }}
         >
           <Row gutter={16}>
             <Col xs={24} md={24}>
@@ -258,7 +258,7 @@ if (!transaction) {
                       </span>
                     </Descriptions.Item>
                   )}
-                  {blockData?.tx?.tx?.key && (
+                  {/* {blockData?.tx?.tx?.key && (
                     <Descriptions.Item label="Key">
                     <span
                       style={{fontFamily: "monospace",
@@ -273,7 +273,7 @@ if (!transaction) {
                       {blockData?.tx?.tx?.key}
                     </span>
                   </Descriptions.Item>
-                  )}
+                  )} */}
                   {blockData?.tx?.tx?.cbdc_tx_hash && (
                 <Descriptions.Item label="CBDC Transaction Hash">
                   <span
@@ -497,9 +497,9 @@ if (!transaction) {
         borderRadius: "8px",
         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
         backgroundColor: 'white',
-         border:"1px solid white"
+         border:"1.5px solid #141414"
       }}
-      headStyle={{ color: "white", backgroundColor: "#1C2531" }}
+      headStyle={{ color: "white", backgroundColor: "rgb(21, 21, 21)" }}
       className="custom-card"
     >
       <Descriptions
@@ -576,9 +576,9 @@ if (!transaction) {
         borderRadius: "8px",
         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
         backgroundColor: 'white',
-         border:"1px solid white"
+         border:"1px solid #141414"
       }}
-      headStyle={{ color: "white", backgroundColor: "#1C2531" }}
+      headStyle={{ color: "white", backgroundColor: "rgb(21, 21, 21)" }}
       className="custom-card"
     >
       <Descriptions
