@@ -52,7 +52,7 @@ const LimitsPage = () => {
         {
           key: 'load_amount_max_limit',
           updated_by: 'admin',
-          value: loadLimit, // Dynamically use the current input value
+          value: loadLimit, 
         }
       );
 
@@ -92,7 +92,7 @@ const LimitsPage = () => {
               <Title level={5} style={{ color: '#FFF' }}>
                 XCBDC Load
               </Title>
-              <Text type="secondary" style={{ color: '#595959' }}>
+              <Text type="secondary" style={{ color: '#FFF', fontWeight:'400' }}>
                 (Real-time change)
               </Text>
             </Col>

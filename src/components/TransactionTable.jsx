@@ -191,19 +191,16 @@ const TransactionDetails = () => {
   // Columns for the table
   const headerStyle = {
     background: 'none',
-    // backgroundColor: 'grey',
-    color: '#6a6c6e',
-    fontWeight:'500',
+    color: '#fff',
+    fontWeight:'700',
     textAlign: 'center',
     padding: '12px',
     borderRadius: '8px',
-    // boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.3)',
+    fontSize: '16px'
   };
 
   const columnStyle = {
     padding: '10px',
-    // background: 'linear-gradient(90deg, #e8f0fc, #d0e7fa)', // Gradient background for columns
-    // background: 'linear-gradient(90deg, #e8f0fc, #d0e7fa)', // Gradient background for columns
     borderRadius: '8px',
     color: '#fff', // Text color
     textAlign: 'center', // Center-align text
@@ -224,7 +221,7 @@ const TransactionDetails = () => {
       
       onHeaderCell: () => ({
         style: {
-          backgroundColor: '#000',border: 'none', // Header background color
+          backgroundColor: '#000', // Header background color
         },
       }),
       onCell: () => ({
@@ -255,7 +252,7 @@ const TransactionDetails = () => {
       
       onHeaderCell: () => ({
         style: {
-          backgroundColor: '#000',  border: 'none',// Header background color
+          backgroundColor: '#000', // Header background color
         },
       }),
       onCell: () => ({
@@ -288,7 +285,7 @@ const TransactionDetails = () => {
       
       onHeaderCell: () => ({
         style: {
-          backgroundColor: '#000',  border: 'none',// Header background color
+          backgroundColor: '#000', // Header background color
         },
       }),
       onCell: () => ({
@@ -321,7 +318,7 @@ const TransactionDetails = () => {
       align: 'center',
       onHeaderCell: () => ({
         style: {
-          backgroundColor: '#000',  border: 'none',// Header background color
+          backgroundColor: '#000',// Header background color
         },
       }),
       onCell: () => ({
@@ -352,7 +349,7 @@ const TransactionDetails = () => {
       align: 'center',
       onHeaderCell: () => ({
         style: {
-          backgroundColor: '#000',  border: 'none',// Header background color
+          backgroundColor: '#000', // Header background color
         },
       }),
       onCell: () => ({
@@ -383,7 +380,7 @@ const TransactionDetails = () => {
       align: 'center',
       onHeaderCell: () => ({
         style: {
-          backgroundColor: '#000',  border: 'none', // Header background color
+          backgroundColor: '#000', // Header background color
         },
       }),
       onCell: () => ({
@@ -413,7 +410,7 @@ const TransactionDetails = () => {
       align: 'center',
       onHeaderCell: () => ({
         style: {
-          backgroundColor: '#000',  border: 'none',// Header background color
+          backgroundColor: '#000', // Header background color
         },
       }),
       onCell: () => ({
@@ -444,7 +441,7 @@ const TransactionDetails = () => {
       align: 'center',
       onHeaderCell: () => ({
         style: {
-          backgroundColor: '#000', border: 'none', // Header background color
+          backgroundColor: '#000',  // Header background color
         },
       }),
       onCell: () => ({
@@ -471,7 +468,7 @@ const TransactionDetails = () => {
       align: 'center',
       onHeaderCell: () => ({
         style: {
-          backgroundColor: '#000',  border: 'none',// Header background color
+          backgroundColor: '#000',  // Header background color
         },
       }),
       onCell: () => ({
@@ -522,7 +519,7 @@ const TransactionDetails = () => {
           fontWeight: table === "load_x" ? 'bold' : 'normal'
         }}
       >
-        Load
+        LOAD
       </div>
       <div
         onClick={() => handleButtonClick("unload_x")}
@@ -535,7 +532,7 @@ const TransactionDetails = () => {
           fontWeight: table === "unload_x" ? 'bold' : 'normal'
         }}
       >
-        Unload
+        UNLOAD
       </div>
       <div
         onClick={() => handleButtonClick("transfer_x")}
@@ -548,7 +545,7 @@ const TransactionDetails = () => {
           fontWeight: table === "transfer_x" ? 'bold' : 'normal'
         }}
       >
-        Transfer
+        TRANSFER
       </div>
       <div
         onClick={() => handleButtonClick("utxos_x")}
