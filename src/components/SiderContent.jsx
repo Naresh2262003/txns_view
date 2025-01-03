@@ -41,7 +41,8 @@ const SiderContent = ({ collapsed, setCollapsed }) => {
     <div
       className="sider-content"
       style={{
-        background: 'linear-gradient(135deg, #1a1a1a, #2c3e50)', // Deep gradient for dark theme
+        // background: 'linear-gradient(135deg, #1a1a1a, #2c3e50)', // Deep gradient for dark theme
+        backgroundColor: '#000',
         padding: '10px',
         height: '100vh',
         boxShadow: '2px 0 10px rgba(0, 0, 0, 0.3)', // Add subtle shadow for depth

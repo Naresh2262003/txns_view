@@ -262,14 +262,15 @@ const TransactionDetails = () => {
       }),
       render: (status) => (
         <Tag
-          style={{
-            color: status === 'completed' ? '#2E8B57' : '#DC143C',
-            backgroundColor: status === 'completed' ? '#2E8B571F' : '#DC143C1F', // 1F is 15% opacity in hex
-            border: `1px solid ${status === 'completed' ? '#2E8B57' : '#DC143C'}`,
-            padding: '4px 8px', // Optional padding for better appearance
-            borderRadius: '4px', // Optional for rounded corners
-            display: 'inline-block', // Ensures it behaves like a tag
-          }}
+          // style={{
+          //   color: status === 'completed' ? '#2E8B57' : '#DC143C',
+          //   backgroundColor: status === 'completed' ? '#2E8B571F' : '#DC143C1F', // 1F is 15% opacity in hex
+          //   border: `1px solid ${status === 'completed' ? '#2E8B57' : '#DC143C'}`,
+          //   padding: '4px 8px', // Optional padding for better appearance
+          //   borderRadius: '4px', // Optional for rounded corners
+          //   display: 'inline-block', // Ensures it behaves like a tag
+          // }}
+          color={status === 'completed' ? '#2E8B57' : '#DC143C'}
         >
           {status.toUpperCase()}
         </Tag>
@@ -295,15 +296,17 @@ const TransactionDetails = () => {
       }),
       render: (type) => (
         <Tag
-          color="#1E3A8A"
-          style={{
-            color: '#1E3A8A',
-            backgroundColor: '#1E3A8A1F', // 1F is 15% opacity in hex
-            border: '1px solid #1E3A8A',
-            borderRadius: '20px',
-            padding: '2px 10px',
-            display: 'inline-block', // Ensures it behaves like a tag
-          }}
+          // color="#1E3A8A"
+          // style={{
+          //   color: '#1E3A8A',
+          //   backgroundColor: '#1E3A8A1F', // 1F is 15% opacity in hex
+          //   border: '1px solid #1E3A8A',
+          //   borderRadius: '20px',
+          //   padding: '2px 10px',
+          //   display: 'inline-block', // Ensures it behaves like a tag
+          // }}
+
+          color="#1E3A8A" style={{ borderRadius: '20px', padding: '2px 10px' }}
         >
           {type}
         </Tag>
@@ -453,7 +456,7 @@ const TransactionDetails = () => {
         const abbreviatedValue = abbreviateString(value, 30); // Abbreviate amount string to 10 characters
         return (
           <div style={{ ...columnStyle, color:"#c23fff", fontWeight: 'bold'}}>
-            <span>{abbreviatedValue}</span>
+            <span>{(table== 'load_x' || table == 'unload_x') ? '₹ ':''}{abbreviatedValue}</span>
           </div>
         );
       },
